@@ -7,6 +7,7 @@ const IndexPage = () => {
       <title>Home Page</title>
       <h1>hello world!</h1>
       <p>this is my new app</p>
+      <p>my app that has deployed!!!!!</p>
     </main>
   )
 }
