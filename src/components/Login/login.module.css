@@ -21,6 +21,10 @@ input {
   box-shadow: 0 0 2px lightgrey;
   border-radius: 5px;
 }
+.errorText {
+  color: red;
+  font-size: small;
+}
 
 button {
   margin: 10px;
