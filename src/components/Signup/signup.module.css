@@ -1,0 +1,43 @@
+
+form {
+  margin: auto;
+  margin-top: 30px;
+  width: 40vw;
+  background-color: azure;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+input {
+  display: block;
+  width: 80%;
+  margin: 10px;
+  padding: 8px;
+  outline: none;
+  border: 0;
+  box-shadow: 0 0 2px lightgrey;
+  border-radius: 5px;
+}
+.errorText {
+  color: red;
+  font-size: small;
+}
+
+.successText {
+  color: green;
+  font-size: small;
+}
+
+button {
+  margin: 10px;
+
+}
+
+.linkText {
+  color: grey;
+  font-size: small;
+  text-decoration: none;
+}

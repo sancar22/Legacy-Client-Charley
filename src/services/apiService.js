@@ -13,8 +13,14 @@ const attemptLogin = (login) => {
   });
 };
 
-const attemptSignup = () => {
-
+const attemptSignup = (signup) => {
+  return fetch(BASE_URL+'/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(signup)
+  });
 }
 
 
