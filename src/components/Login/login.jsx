@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Link, navigate } from "gatsby";
+import { useDispatch } from "react-redux";
 
 import * as styles from "./login.module.css";
 import { attemptLogin} from "../../services/apiService";
+
+import { set_username } from "../../state/actions";
 
 
 const initialState = {
@@ -14,6 +17,8 @@ const Login = () => {
 
   const [login, setLogin] = useState(initialState);
   const [loginError, setLoginError] = useState(false);
+  const dispach = useDispatch();
+
 
   const handleLogin = ({target}) => {
     setLogin(oldLogin => ({...oldLogin, [target.name]:target.value}))
@@ -32,6 +37,7 @@ const Login = () => {
       let json = await response.json();
       localStorage.setItem('accessToken', json.accessToken);
       console.log(json.user);
+      dispach(set_username(json.user.username));
 
       setLogin(initialState);
       navigate('/profile');
