@@ -23,7 +23,18 @@ const attemptSignup = (signup) => {
   });
 }
 
+const logout = (itemName) => {
+  // pass in 'accessToken'
+  let token = localStorage.getItem(itemName);
+  localStorage.removeItem(itemName)
+  return fetch(BASE_URL + '/logout', {
+    headers: {
+      'Authorization': `Bearer: ${token}`
+    }
+  });
+}
+
 
 module.exports = {
-  attemptLogin, attemptSignup,
+  attemptLogin, attemptSignup, logout
 }
