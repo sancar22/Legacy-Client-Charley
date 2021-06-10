@@ -1,0 +1,9 @@
+
+.container {
+  height: 10vh;
+  width: 100%;
+  background-color: aliceblue;
+  display: flex;
+}
+
+
