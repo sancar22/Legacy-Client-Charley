@@ -1,13 +1,16 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore as reduxCreateStore } from 'redux';
-import reducers from './reducers';
+import { PersistGate } from 'redux-persist/integration/react'
+import reduxStore from './store';
 
-const createStore = () => reduxCreateStore(reducers);
-
+const {store, persistor} = reduxStore();
 
 const root = ({ element }) => (
-  <Provider store={createStore()}>{element}</Provider>
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+    {element}
+    </PersistGate>
+  </Provider>
 );
 
 export default root;

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 const ProfilePage = () => {
   const username = useSelector(state => state.username);
+  
   return (
   <div>
      {username}
