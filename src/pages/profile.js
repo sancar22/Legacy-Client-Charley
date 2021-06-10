@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import Logout from '../components/Logout/logout';
 import { fetchProfileData } from '../services/apiService';
 import { set_username } from '../state/actions';
 
@@ -26,10 +27,10 @@ const ProfilePage = () => {
   }, [isAuthenticated, dispatch])
 
 
-
   return (
   <div>
      {username}
+      <Logout/>
   </div> );
 }
 
