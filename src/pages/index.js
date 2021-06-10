@@ -1,15 +1,15 @@
-import * as React from 'react'
-import Header from '../components/Header/header'
+import * as React from 'react';
+
+import Header from '../components/Header/header';
+import Login from '../components/Login/login';
+import "../styles/global.css";
 
 
 const IndexPage = () => {
   return (
     <main>
       <Header/>
-      <title>Home Page</title>
-      <h1>hello world!</h1>
-      <p>this is my new app</p>
-      <p>my app that has deployed!!!!!</p>
+      <Login/>
     </main>
   )
 }
