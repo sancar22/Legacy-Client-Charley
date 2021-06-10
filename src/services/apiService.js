@@ -23,6 +23,15 @@ const attemptSignup = (signup) => {
   });
 }
 
+const fetchProfileData = (token) => {
+  return fetch(BASE_URL+'/profile', {
+    headers: {
+      'Authorization': `Bearer: ${token}`
+    }
+  })
+}
+
+
 const logout = (itemName) => {
   // pass in 'accessToken'
   let token = localStorage.getItem(itemName);
@@ -36,5 +45,5 @@ const logout = (itemName) => {
 
 
 module.exports = {
-  attemptLogin, attemptSignup, logout
+  attemptLogin, attemptSignup, logout, fetchProfileData
 }

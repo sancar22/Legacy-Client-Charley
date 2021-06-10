@@ -10,7 +10,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, reducers);
 
 
-export default (preloadedState = {}) => {
+ const reduxStore = (preloadedState = {}) => {
   const store = createStore(
     persistedReducer,
     preloadedState, // initial state
@@ -18,3 +18,5 @@ export default (preloadedState = {}) => {
   const persistor = persistStore(store);
   return { store, persistor };
 }
+
+export default reduxStore

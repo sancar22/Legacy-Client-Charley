@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import * as styles from "./login.module.css";
 import { attemptLogin} from "../../services/apiService";
 
-import { set_username } from "../../state/actions";
+import { authenticate_user } from "../../state/actions";
 
 
 const initialState = {
@@ -17,7 +17,7 @@ const Login = () => {
 
   const [login, setLogin] = useState(initialState);
   const [loginError, setLoginError] = useState(false);
-  const dispach = useDispatch();
+  const dispatch = useDispatch();
 
 
   const handleLogin = ({target}) => {
@@ -31,16 +31,15 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const response = await attemptLogin(login);
     if (response.ok) {
-      // user is authenticated state update to be here
+      dispatch(authenticate_user());
       let json = await response.json();
       localStorage.setItem('accessToken', json.accessToken);
-      console.log(json.user);
-      dispach(set_username(json.user.username));
-
       setLogin(initialState);
       navigate('/profile');
+
     } else {
       setLoginError(true);
     }
