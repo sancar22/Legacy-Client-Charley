@@ -21,6 +21,7 @@ const middleware = composeWithDevTools(applyMiddleware(loggerMiddleware));
     preloadedState, // initial state
     middleware
   );
+  
   const persistor = persistStore(store);
   return { store, persistor };
 }
