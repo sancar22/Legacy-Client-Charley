@@ -15,6 +15,7 @@ const ProfilePage = () => {
     const accessToken = localStorage.getItem('accessToken');
 
     console.log(isAuthenticated);
+    console.log(accessToken);
 
     const getUserData = async (accessToken ) => {
       const userData = await (await fetchProfileData(accessToken)).json();
