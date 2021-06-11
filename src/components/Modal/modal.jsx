@@ -5,9 +5,12 @@ import { scrapeRecipe } from "../../services/apiService";
 
 const Modal = ({ show, handleClose }) => {
   const [url, setUrl] = useState("");
+  const [error, setError] = useState(false);
+
 
   const handleChange = ({ target }) => {
     setUrl(target.value);
+    setError(false);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,7 +19,9 @@ const Modal = ({ show, handleClose }) => {
       console.log(recipeData);
       setUrl("");
       handleClose();
-    } catch (e) {}
+    } catch (e) {
+      setError(true);
+    }
   };
 
   return (
@@ -31,6 +36,12 @@ const Modal = ({ show, handleClose }) => {
             onChange={handleChange}
             className={styles.input}
           />
+          {error ? (
+            <p className={styles.errorText}>
+              unable to import, please try another website
+            </p>
+          ) : null}
+
           <button type="submit">submit</button>
         </form>
 

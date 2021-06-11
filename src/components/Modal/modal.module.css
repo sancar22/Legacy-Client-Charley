@@ -52,3 +52,8 @@
 .input {
   width: 100%;
 }
+
+.errorText {
+  color: red;
+  font-size: small;
+}

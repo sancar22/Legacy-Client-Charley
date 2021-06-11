@@ -52,8 +52,6 @@ const scrapeRecipe = (url) => {
 }
 
 
-
-
 module.exports = {
   attemptLogin, attemptSignup, logout, fetchProfileData, scrapeRecipe
 }
