@@ -41,7 +41,19 @@ const logout = (itemName) => {
   });
 }
 
+const scrapeRecipe = (url) => {
+  return fetch(BASE_URL+'/scrape', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({url})
+  }).then(res => res.json());
+}
+
+
+
 
 module.exports = {
-  attemptLogin, attemptSignup, logout, fetchProfileData
+  attemptLogin, attemptSignup, logout, fetchProfileData, scrapeRecipe
 }

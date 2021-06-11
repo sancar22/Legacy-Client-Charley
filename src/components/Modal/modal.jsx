@@ -1,31 +1,23 @@
 import React, { useState } from "react";
 import * as styles from "./modal.module.css";
-import recipeService from '../../services/recipeService';
+
+import { scrapeRecipe } from "../../services/apiService";
 
 const Modal = ({ show, handleClose }) => {
+  const [url, setUrl] = useState("");
 
-  const [url, setUrl] = useState('');
-
-  const handleChange = ({target}) => {
+  const handleChange = ({ target }) => {
     setUrl(target.value);
-  }
-
-
-  const handleSubmit = (e) => {
+  };
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(url);
-      const jsonld = recipeService.saveRecipe(url);
-      console.log(jsonld);
-      setUrl('');
+      const recipeData = await scrapeRecipe(url);
+      console.log(recipeData);
+      setUrl("");
       handleClose();
-    } catch (e) {
-
-    }
-
-  }
-
-
+    } catch (e) {}
+  };
 
   return (
     <div className={show ? styles.modalShow : styles.modalHide}>
@@ -34,7 +26,7 @@ const Modal = ({ show, handleClose }) => {
 
         <form className={styles.form} onSubmit={handleSubmit}>
           <input
-            name='url'
+            name="url"
             value={url}
             onChange={handleChange}
             className={styles.input}
