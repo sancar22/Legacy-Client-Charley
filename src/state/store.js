@@ -7,6 +7,7 @@ import reducers from './reducers';
 
 const persistConfig = {
   key: 'root',
+  timeout: null,
   storage,
   whitelist: ['isAuthenticated', 'username', 'recipeStore']
 };
