@@ -5,6 +5,7 @@ import { fetchProfileData } from '../services/apiService';
 import { set_username } from '../state/actions';
 
 import Header from '../components/Header/header';
+import RecipeAdder from '../components/RecipeAdder/recipeAdder';
 
 
 const ProfilePage = () => {
@@ -35,10 +36,8 @@ const ProfilePage = () => {
   return (
   <>
 
-
-
     {
-      isAuthenticated &&  <Header logout = {<Logout/> } username={username}/>
+      isAuthenticated && <> <Header logout = {<Logout/> } username={username}/> <RecipeAdder/></>
     }
     {
       !isAuthenticated && <div>you need to login first!!!</div>

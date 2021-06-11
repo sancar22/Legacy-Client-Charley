@@ -15,11 +15,9 @@ const Logout = () => {
   };
 
   return (
-    <div>
       <div onClick={handleLogout} className={styles.logout}>
         logout
       </div>
-    </div>
   );
 };
 
