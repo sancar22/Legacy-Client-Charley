@@ -1,6 +1,9 @@
 import { combineReducers } from 'redux';
 
-const initialAuth = localStorage.accessToken ? true : false;
+//const initialAuth = localStorage.accessToken ? true : false;
+//console.log(`auth state ${initialAuth}`);
+
+const initialAuth = false;
 
 const isAuthenticated = (state = initialAuth, action) => {
 

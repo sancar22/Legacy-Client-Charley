@@ -5,7 +5,6 @@ import reduxStore from './store';
 
 const {store, persistor} = reduxStore();
 
-
 const root = ({ element }) => (
 
   <Provider store={store}>
