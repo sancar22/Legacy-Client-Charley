@@ -31,10 +31,15 @@ const ProfilePage = () => {
 
 
   return (
-  <div>
-     {username}
-      <Logout/>
-  </div> );
+  <>
+    {
+      isAuthenticated &&  <> {username} <Logout/> </>
+    }
+    {
+      !isAuthenticated && <div>you need to login first!!!</div>
+    }
+
+  </> );
 }
 
 export default ProfilePage;
