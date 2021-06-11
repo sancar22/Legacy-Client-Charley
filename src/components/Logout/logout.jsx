@@ -3,6 +3,7 @@ import { navigate } from "gatsby";
 import { useDispatch } from "react-redux";
 import { logout } from "../../services/apiService";
 import { logout_user } from "../../state/actions";
+import * as styles from "./logout.module.css";
 
 const Logout = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,9 @@ const Logout = () => {
 
   return (
     <div>
-      <button onClick={handleLogout}>log out !!!!</button>
+      <div onClick={handleLogout} className={styles.logout}>
+        logout
+      </div>
     </div>
   );
 };

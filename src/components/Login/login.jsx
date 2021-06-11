@@ -47,8 +47,8 @@ const Login = () => {
 
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div >
+      <form onSubmit={handleSubmit} className={styles.loginForm}>
         <input
           type="email"
           name="email"
@@ -64,16 +64,17 @@ const Login = () => {
           onChange={handleLogin}
         />
 
-        {loginError ? <p className={styles.errorText}>user name or password is invalid</p> : null}
+        {loginError ? (
+          <p className={styles.errorText}>user name or password is invalid</p>
+        ) : null}
 
-        <button
-          type="submit"
-          disabled={validateForm()}
-        >
+        <button type="submit" disabled={validateForm()}>
           login
         </button>
 
-        <Link to="/signup" className = {styles.linkText}>click here to sign up</Link>
+        <Link to="/signup" className={styles.linkText}>
+          click here to sign up
+        </Link>
       </form>
     </div>
   );

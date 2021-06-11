@@ -3,7 +3,6 @@ const BASE_URL = "https://chef-share-server.herokuapp.com";
 
 
 const attemptLogin = (login) => {
-
   return fetch(BASE_URL+'/login', {
     method: 'POST',
     headers: {
@@ -30,7 +29,6 @@ const fetchProfileData = (token) => {
     }
   })
 }
-
 
 const logout = (itemName) => {
   // pass in 'accessToken'

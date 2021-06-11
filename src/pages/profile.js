@@ -4,6 +4,8 @@ import Logout from '../components/Logout/logout';
 import { fetchProfileData } from '../services/apiService';
 import { set_username } from '../state/actions';
 
+import Header from '../components/Header/header';
+
 
 const ProfilePage = () => {
 
@@ -32,8 +34,11 @@ const ProfilePage = () => {
 
   return (
   <>
+
+
+
     {
-      isAuthenticated &&  <> {username} <Logout/> </>
+      isAuthenticated &&  <Header logout = {<Logout/> } username={username}/>
     }
     {
       !isAuthenticated && <div>you need to login first!!!</div>

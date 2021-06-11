@@ -1,8 +1,13 @@
 import React from "react";
 import * as styles from "./header.module.css";
 
-const Header = () => {
-  return <div className={styles.container}>I will be a header</div>;
+const Header = ({ username, logout }) => {
+  return (
+    <div className={styles.container}>
+      <div>Welcome back chef {username}</div>
+      {logout}
+    </div>
+  );
 };
 
 export default Header;

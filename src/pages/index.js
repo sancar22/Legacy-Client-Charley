@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import Header from '../components/Header/header';
 import Login from '../components/Login/login';
 import "../styles/global.css";
 
@@ -8,7 +7,7 @@ import "../styles/global.css";
 const IndexPage = () => {
   return (
     <main>
-      <Header/>
+      <h1>Welcome to Chef Share</h1>
       <Login/>
     </main>
   )

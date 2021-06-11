@@ -40,7 +40,7 @@ const Signup = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.signupForm}>
         <input
           type="email"
           name="email"
@@ -67,9 +67,7 @@ const Signup = () => {
         ) : null}
 
         {submitSuccess ? (
-          (
           <p className={styles.successText}>success! login to continue</p>
-        )
         ) : null}
 
         <button type="submit" disabled={validateForm()}>
