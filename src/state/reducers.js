@@ -1,18 +1,15 @@
 import { combineReducers } from 'redux';
 
-//const initialAuth = localStorage.accessToken ? true : false;
-//console.log(`auth state ${initialAuth}`);
 
-const initialAuth = false;
 
-const isAuthenticated = (state = initialAuth, action) => {
+
+const isAuthenticated = (state = false, action) => {
 
   switch (action.type) {
-  case 'AUTHENTICATE_USER': return true;
-  case 'LOGOUT_USER': return false;
-  case 'CHECK_USER_AUTH':
-    return localStorage.accessToken ? true : false;
-  default: return state;
+    case 'SET_IS_AUTHENTICATED': return true;
+    case 'SET_NOT_AUTHENTICATED': return false;
+    case 'LOGOUT_USER': return false;
+    default: return state;
   }
 
 };

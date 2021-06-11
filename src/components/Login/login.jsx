@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import * as styles from "./login.module.css";
 import { attemptLogin} from "../../services/apiService";
 
-import { authenticate_user } from "../../state/actions";
+import { set_is_authenticated } from "../../state/actions";
 
 
 const initialState = {
@@ -34,7 +34,7 @@ const Login = () => {
 
     const response = await attemptLogin(login);
     if (response.ok) {
-      dispatch(authenticate_user());
+      dispatch(set_is_authenticated());
       let json = await response.json();
       localStorage.setItem('accessToken', json.accessToken);
       setLogin(initialState);

@@ -14,6 +14,8 @@ const ProfilePage = () => {
   useEffect( () => {
     const accessToken = localStorage.getItem('accessToken');
 
+    console.log(isAuthenticated);
+
     const getUserData = async (accessToken ) => {
       const userData = await (await fetchProfileData(accessToken)).json();
       console.log(userData);
