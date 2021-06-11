@@ -8,9 +8,6 @@ import rootReducer from './reducers';
 const persistConfig = {
   key: 'root',
   storage,
-  //whitelist: ['isAuthenticated', 'username', 'recipeStore'],
-  //blacklist: ['_persist'],
-  timeout: null,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
