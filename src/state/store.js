@@ -15,15 +15,13 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const loggerMiddleware = createLogger();
 const middleware = composeWithDevTools(applyMiddleware(loggerMiddleware));
 
- const reduxStore = (preloadedState = {}) => {
+export default () => {
   const store = createStore(
     persistedReducer,
-    preloadedState, // initial state
     middleware
   );
-  
+
   const persistor = persistStore(store);
   return { store, persistor };
 }
 
-export default reduxStore
