@@ -5,6 +5,8 @@ const isAuthenticated = (state = false, action) => {
   switch (action.type) {
   case 'AUTHENTICATE_USER': return true;
   case 'LOGOUT_USER': return false;
+  case 'CHECK_USER_AUTH':
+    return localStorage.accessToken ? true : false;
   default: return state;
   }
 
