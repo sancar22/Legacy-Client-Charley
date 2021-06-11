@@ -9,6 +9,7 @@ const {store, persistor} = reduxStore();
 
 const handleAuth = (store) => {
   const token = localStorage.getItem('accessToken');
+  console.log(`inside redux wrapper ${token}`);
   if (token) {
     store.dispatch(set_is_authenticated());
   } else {
