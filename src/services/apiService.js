@@ -53,7 +53,19 @@ const scrapeRecipe = (url) => {
   }).then(res => res.json());
 }
 
+const deleteRecipe = (id) => {
+  let token = localStorage.getItem('accessToken');
+  return fetch(BASE_URL+'/deleteRecipe', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer: ${token}`
+    },
+    body: JSON.stringify({id})
+  })
+}
+
 
 module.exports = {
-  attemptLogin, attemptSignup, logout, fetchProfileData, scrapeRecipe
+  attemptLogin, attemptSignup, logout, fetchProfileData, scrapeRecipe, deleteRecipe
 }

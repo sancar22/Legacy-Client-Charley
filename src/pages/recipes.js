@@ -23,7 +23,6 @@ const RecipePage = () => {
 
     if (isAuthenticated) {
       getUserData(accessToken);
-      console.log(recipeStore);
     }
 
   }, [isAuthenticated, dispatch])
@@ -35,7 +34,9 @@ const RecipePage = () => {
         <Header/>
         <NavBar/>
         {
-          recipeStore.map(recipe => <Recipe recipe={recipe}/>)
+          recipeStore.length ?
+          recipeStore.map(recipe => <Recipe recipe={recipe}/>) :
+          <div style= {{margin: '40px'}}>no recipes</div>
         }
       </>
    }

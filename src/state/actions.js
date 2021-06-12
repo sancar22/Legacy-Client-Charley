@@ -23,4 +23,9 @@ export const rewrite_store = (store) => ({
   payload: store
 })
 
+export const delete_item = (id) => ({
+  type: "DELETE_ITEM",
+  payload: id
+})
+
 

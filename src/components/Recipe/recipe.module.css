@@ -19,7 +19,7 @@
   padding-left: 20px;
   padding-bottom:10px;
   flex-direction: column;
-  max-width: 80%;
+  width: 85%;
   height: 150px;
   justify-content: space-between;
 }
@@ -33,4 +33,26 @@
 .image {
   width: 150px;
   height: 150px;
+}
+
+.showDeleteIcon {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  height: 30px;
+  cursor: pointer;
+}
+.showDeleteIcon:hover {
+  background-color: aliceblue;
+}
+.showDeleteIcon:active {
+  background-color: azure;
+}
+
+.hideDeleteIcon {
+  display: none;
 }

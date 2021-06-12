@@ -30,6 +30,8 @@ const recipeStore = (state=[], action) => {
     case 'REWRITE_STORE':
       state = [...action.payload];
       return state;
+    case 'DELETE_ITEM':
+      return state.filter(item => item.id !== action.payload);
     default: return state;
   }
 }
