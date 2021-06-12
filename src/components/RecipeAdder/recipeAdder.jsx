@@ -5,7 +5,6 @@ import * as styles from "./recipeAdder.module.css";
 const RecipeAdder = () => {
   const [modalStatus, setModalStatus] = useState(false);
 
-
   const handleModal = () => {
     setModalStatus(!modalStatus);
   };
