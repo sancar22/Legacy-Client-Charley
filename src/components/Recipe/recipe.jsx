@@ -24,25 +24,27 @@ const Recipe = ({ recipe }) => {
     }
   };
 
+  const keywordString = recipe?.keywords.join(", ");
+
   return (
     <>
       <div
         className={styles.container}
-        onMouseEnter={()  => setInFocus(true)}
-        onMouseLeave={()  => setInFocus(false)}
-        onClick={handleModal}
+        onMouseEnter={() => setInFocus(true)}
+        onMouseLeave={() => setInFocus(false)}
       >
         {recipe.image && <img src={recipe.image} className={styles.image}></img>}
         {!recipe.image && <div className={styles.noImage}></div>}
 
-        <div className={styles.detailsBox}>
+        <div className={styles.detailsBox} onClick={handleModal}>
           <div>
             <div>{recipe.name}</div>
             <div>{recipe.publisher}</div>
             <div>{recipe.author}</div>
           </div>
-          <div className={styles.keywords}>{recipe.keywords}</div>
+          <div className={styles.keywords}>{keywordString}</div>
         </div>
+
         <div
           className={inFocus ? styles.showDeleteIcon : styles.hideDeleteIcon}
           onClick={handleDelete}
@@ -50,8 +52,12 @@ const Recipe = ({ recipe }) => {
           x
         </div>
       </div>
-    <RecipeModal show={modalStatus} handleClose={handleModal} recipe={recipe}/>
-  </>
+      <RecipeModal
+        show={modalStatus}
+        handleClose={handleModal}
+        recipe={recipe}
+      />
+    </>
   );
 };
 

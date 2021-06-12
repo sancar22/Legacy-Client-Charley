@@ -22,7 +22,9 @@
   width: 85%;
   height: 150px;
   justify-content: space-between;
+  overflow: hidden;
 }
+
 
 .noImage {
   width: 150px;
@@ -45,6 +47,7 @@
   padding: 10px;
   height: 30px;
   cursor: pointer;
+
 }
 .showDeleteIcon:hover {
   background-color: aliceblue;
