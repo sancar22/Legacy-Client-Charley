@@ -1,0 +1,36 @@
+
+.container {
+  width: 90%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 40px;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 0 2px lightgrey;
+  display: flex;
+}
+.container:hover {
+  transform: scale(1.02);
+  transition: 1s;
+}
+
+.detailsBox {
+  display: flex;
+  padding-left: 20px;
+  padding-bottom:10px;
+  flex-direction: column;
+  max-width: 80%;
+  height: 150px;
+  justify-content: space-between;
+}
+
+.noImage {
+  width: 150px;
+  height: 150px;
+  background-color: aliceblue;
+}
+
+.image {
+  width: 150px;
+  height: 150px;
+}

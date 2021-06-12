@@ -11,4 +11,5 @@
 .navElement {
   font-size: small;
   font-weight: 200;
+  cursor: pointer;
 }

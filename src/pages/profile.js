@@ -11,18 +11,13 @@ import NavBar from '../components/NavBar/navbar';
 const ProfilePage = () => {
 
   const isAuthenticated = useSelector(state => state.isAuthenticated);
-  //const username = useSelector(state => state.username);
   const dispatch = useDispatch();
 
   useEffect( () => {
     const accessToken = localStorage.getItem('accessToken');
 
-    console.log(isAuthenticated);
-    console.log(accessToken);
-
     const getUserData = async (accessToken ) => {
       const userData = await (await fetchProfileData(accessToken)).json();
-      console.log(userData);
       dispatch(set_username(userData.username));
     }
 

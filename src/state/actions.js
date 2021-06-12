@@ -1,7 +1,4 @@
 
-const LOGOUT_USER = 'LOGOUT_USER';
-const SET_USERNAME = 'SET_USERNAME';
-const REWRITE_STORE = 'REWRITE_STORE';
 
 
 export const set_is_authenticated = () => ({
@@ -9,7 +6,7 @@ export const set_is_authenticated = () => ({
 });
 
 export const logout_user = () => ({
-  type: LOGOUT_USER
+  type: "LOGOUT_USER"
 })
 
 export const set_not_authenticated = () => ({
@@ -17,12 +14,12 @@ export const set_not_authenticated = () => ({
 });
 
 export const set_username = (username) => ({
-  type: SET_USERNAME,
+  type: "SET_USERNAME",
   payload: username
 })
 
 export const rewrite_store = (store) => ({
-  type: REWRITE_STORE,
+  type: "REWRITE_STORE",
   payload: store
 })
 
