@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import * as styles from "./recipe.module.css";
 import { delete_item } from "../../state/actions";
 import apiService from "../../services/apiService";
-import RecipeModal from "../RecipeModal/recipemodal";
+import RecipeModal from "../RecipeModal/recipeModal";
 
 
 const Recipe = ({ recipe }) => {
