@@ -2,6 +2,8 @@ import React from "react";
 import * as styles from "./recipeModal.module.css";
 
 const RecipeModal = ({ show, handleClose, recipe }) => {
+  let i = 1;
+
   return (
     <div className={show ? styles.modalShow : styles.modalHide}>
       <div onClick={handleClose} className={styles.closeIcon}>
@@ -17,11 +19,12 @@ const RecipeModal = ({ show, handleClose, recipe }) => {
           ))}
         </ul>
         <div className={styles.prepareHeader}>Prepare</div>
-        <ul>
-          {recipe.recipeInstructions.map((ingredient) => (
-            <li className={styles.ingredient}>{ingredient}</li>
-          ))}
-        </ul>
+        {recipe.recipeInstructions.map((step) => (
+          <>
+            <h4 className={styles.step__header}>STEP{` ${i++}`}</h4>
+            <p className={styles.step__task}>{step}</p>
+          </>
+        ))}
       </div>
     </div>
   );
