@@ -42,10 +42,12 @@ const logout = (itemName) => {
 }
 
 const scrapeRecipe = (url) => {
+  let token = localStorage.getItem('accessToken');
   return fetch(BASE_URL+'/scrape', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer: ${token}`
     },
     body: JSON.stringify({url})
   }).then(res => res.json());

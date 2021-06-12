@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  background-color:white;
+  justify-content: space-around;
+  align-items: center;
+  width: 40%;
+  box-sizing: border-box;
+  height: 40px;
+}
+
+.navElement {
+  font-size: small;
+  font-weight: 200;
+}

@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Logout from '../components/Logout/logout';
 import { fetchProfileData } from '../services/apiService';
 import { set_username } from '../state/actions';
 
 import Header from '../components/Header/header';
 import RecipeAdder from '../components/RecipeAdder/recipeAdder';
+import NavBar from '../components/NavBar/navbar';
 
 
 const ProfilePage = () => {
 
   const isAuthenticated = useSelector(state => state.isAuthenticated);
-  const username = useSelector(state => state.username);
+  //const username = useSelector(state => state.username);
   const dispatch = useDispatch();
 
   useEffect( () => {
@@ -35,9 +35,12 @@ const ProfilePage = () => {
 
   return (
   <>
-
     {
-      isAuthenticated && <> <Header logout = {<Logout/> } username={username}/> <RecipeAdder/></>
+      isAuthenticated && <>
+          <Header/>
+          <NavBar/>
+          <RecipeAdder/>
+        </>
     }
     {
       !isAuthenticated && <div>you need to login first!!!</div>
