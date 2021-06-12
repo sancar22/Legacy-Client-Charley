@@ -1,13 +1,10 @@
 
 .container {
   width: 90%;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  margin-left: 40px;
+  margin: 15px 5%;
   padding: 20px;
-  box-sizing: border-box;
-  box-shadow: 0 0 2px lightgrey;
   display: flex;
+  box-shadow: 0 0 2px lightgrey;
 }
 .container:hover {
   transform: scale(1.02);
@@ -15,12 +12,14 @@
 }
 
 .detailsBox {
-  display: flex;
-  padding-left: 20px;
-  padding-bottom:10px;
-  flex-direction: column;
   width: 85%;
   height: 150px;
+
+  padding-left: 20px;
+  padding-bottom:10px;
+
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
 }
@@ -38,14 +37,16 @@
 }
 
 .showDeleteIcon {
-  position: relative;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  position: relative;
   top: 0;
   right: 0;
   padding: 10px;
-  height: 30px;
+
   cursor: pointer;
 
 }
@@ -55,7 +56,19 @@
 .showDeleteIcon:active {
   background-color: azure;
 }
-
 .hideDeleteIcon {
   display: none;
+}
+
+
+.details__keywords {
+  font-size: 0.9rem;
+  color: #444444;
+}
+.details__name{
+  margin-bottom: 10px;
+}
+.details__author{
+  font-size: 0.95rem;
+  color: #444444;
 }

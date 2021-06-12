@@ -33,16 +33,18 @@ const Recipe = ({ recipe }) => {
         onMouseEnter={() => setInFocus(true)}
         onMouseLeave={() => setInFocus(false)}
       >
-        {recipe.image && <img src={recipe.image} className={styles.image}></img>}
+        {recipe.image && (
+          <img src={recipe.image} className={styles.image}></img>
+        )}
         {!recipe.image && <div className={styles.noImage}></div>}
 
         <div className={styles.detailsBox} onClick={handleModal}>
           <div>
-            <div>{recipe.name}</div>
-            <div>{recipe.publisher}</div>
-            <div>{recipe.author}</div>
+            <div className={styles.details__name}>{recipe.name}</div>
+            <div className={styles.details__author}>{recipe.publisher}</div>
+            <div className={styles.details__author}>{recipe.author}</div>
           </div>
-          <div className={styles.keywords}>{keywordString}</div>
+          <div className={styles.details__keywords}>{keywordString}</div>
         </div>
 
         <div

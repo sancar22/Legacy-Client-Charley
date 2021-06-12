@@ -2,15 +2,19 @@
 .container {
   height: 50px;
   width: 100vw;
-  background-color: aliceblue;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding-left: 20px;
   padding-right: 20px;
-  box-sizing: border-box;
+
+  background-color: aliceblue;
   color: black;
-  font-weight: 300;
+
+  font-weight: 200;
+  font-size: 1rem;
 }
 
 
