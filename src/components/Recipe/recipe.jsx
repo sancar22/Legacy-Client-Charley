@@ -32,7 +32,10 @@ const Recipe = ({ recipe }) => {
     }
   };
 
-  const keywordString = recipe?.keywords.join(", ");
+  let keywordString = "";
+  if (recipe.keywords) {
+    keywordString = recipe.keywords.join(", ");
+  }
 
   return (
     <>
