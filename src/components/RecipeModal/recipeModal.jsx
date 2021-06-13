@@ -23,10 +23,10 @@ const RecipeModal = ({ show, handleClose, recipe }) => {
         </ul>
         <div className={styles.prepareHeader}>Prepare</div>
         {recipe.recipeInstructions.map((step) => (
-          <>
+          <div key={j}>
             <h4 className={styles.step__header}>STEP{` ${j++}`}</h4>
             <p className={styles.step__task}>{step}</p>
-          </>
+          </div>
         ))}
       </div>
     </div>
