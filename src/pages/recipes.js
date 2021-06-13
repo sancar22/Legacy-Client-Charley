@@ -1,11 +1,11 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, {useEffect }from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Header from '../components/Header/header';
-import NavBar from '../components/NavBar/navbar';
+
+import Header from '../components/Headings/Header/header';
+import NavBar from '../components/Headings/NavBar/navbar';
+import Recipe from '../components/Recipe/recipe';
 import { rewrite_store } from '../state/actions';
 import { fetchProfileData } from '../services/apiService';
-import Recipe from '../components/Recipe/recipe';
 
 
 const RecipePage = () => {
@@ -17,7 +17,7 @@ const RecipePage = () => {
     const accessToken = localStorage.getItem('accessToken');
 
     const getUserData = async (accessToken ) => {
-      const userData = await (await fetchProfileData(accessToken)).json();
+      const userData = await fetchProfileData(accessToken).then(res => res.json())
       dispatch(rewrite_store(userData.recipeStore));
     }
 

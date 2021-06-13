@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchProfileData } from '../services/apiService';
 import { set_username } from '../state/actions';
 
-import Header from '../components/Header/header';
+import Header from '../components/Headings/Header/header';
 import RecipeAdder from '../components/RecipeAdder/recipeAdder';
-import NavBar from '../components/NavBar/navbar';
+import NavBar from '../components/Headings/NavBar/navbar';
 
 
 const ProfilePage = () => {

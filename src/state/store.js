@@ -11,17 +11,16 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 const loggerMiddleware = createLogger();
 const middleware = composeWithDevTools(applyMiddleware(loggerMiddleware));
 
-export default () => {
+const reduxStore = () => {
   const store = createStore(
     persistedReducer,
     middleware
   );
-
   const persistor = persistStore(store);
   return { store, persistor };
 }
 
+export default reduxStore;

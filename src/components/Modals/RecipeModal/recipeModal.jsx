@@ -2,12 +2,17 @@ import React from "react";
 import * as styles from "./recipeModal.module.css";
 
 const RecipeModal = ({ show, handleClose, recipe }) => {
-  let i = 1;
-  let j = 1;
+  let i = 0;
+  let j = 0;
+  let k = 0;
 
   return (
     <div className={show ? styles.modalShow : styles.modalHide}>
-      <div onClick={handleClose} className={styles.closeIcon}>
+      <div
+        className={styles.closeIcon}
+        onClick={handleClose}
+        aria-hidden="true"
+      >
         x
       </div>
       <div className={styles.title}>{recipe.name}</div>
@@ -24,10 +29,20 @@ const RecipeModal = ({ show, handleClose, recipe }) => {
         <div className={styles.prepareHeader}>Prepare</div>
         {recipe.recipeInstructions.map((step) => (
           <div key={j}>
-            <h4 className={styles.step__header}>STEP{` ${j++}`}</h4>
+            <h4 className={styles.step__header}>STEP{` ${++j}`}</h4>
             <p className={styles.step__task}>{step}</p>
           </div>
         ))}
+        {recipe.notes.length ? (
+          <>
+            <div className={styles.prepareHeader}>Notes</div>
+            {recipe.notes.map((note) => (
+              <li key={k++} className={styles.text__note}>
+                {note}
+              </li>
+            ))}
+          </>
+        ) : null}
       </div>
     </div>
   );

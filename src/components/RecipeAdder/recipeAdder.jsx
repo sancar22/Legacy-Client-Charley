@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Modal from "../Modal/modal";
+import Modal from "../Modals/Modal/modal";
 import * as styles from "./recipeAdder.module.css";
 
 const RecipeAdder = () => {
@@ -11,9 +11,12 @@ const RecipeAdder = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.addButton} onClick={handleModal}>
+      <div
+        className={styles.addButton}
+        onClick={handleModal}
+        aria-hidden="true"
+      >
         +
-
       </div>
       <Modal show={modalStatus} handleClose={handleModal}></Modal>
     </div>

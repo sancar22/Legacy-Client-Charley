@@ -5,10 +5,18 @@ import * as styles from "./navbar.module.css";
 const NavBar = () => {
   return (
     <div className={styles.container}>
-      <div className={styles.navElement} onClick={() => navigate("/recipes")}>
+      <div
+        className={styles.navElement}
+        onClick={() => navigate("/recipes")}
+        aria-hidden="true"
+      >
         my recipes
       </div>
-      <div className={styles.navElement} onClick={() => navigate("/profile")}>
+      <div
+        className={styles.navElement}
+        onClick={() => navigate("/profile")}
+        aria-hidden="true"
+      >
         home
       </div>
       <div className={styles.navElement}>visit friends</div>

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "gatsby";
+import { Link, navigate } from "gatsby";
+import { useDispatch } from "react-redux";
+
+import apiService from "../../../services/apiService";
+import { set_is_authenticated } from "../../../state/actions";
 import * as styles from "./signup.module.css";
-import { attemptSignup } from "../../services/apiService";
 
 const initialState = {
   email: "",
@@ -13,6 +16,7 @@ const Signup = () => {
   const [signup, setSignup] = useState(initialState);
   const [signupError, setSignupError] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const dispatch = useDispatch();
 
   const handleLogin = ({ target }) => {
     setSignup((oldSignup) => ({ ...oldSignup, [target.name]: target.value }));
@@ -25,14 +29,14 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await attemptSignup(signup);
+    const response = await apiService.attemptSignup(signup);
     if (response.ok) {
-      // user is authenticated state update to be here
       let json = await response.json();
       localStorage.setItem("accessToken", json.accessToken);
-      console.log(json.newUser);
-      setSignup(initialState);
+      dispatch(set_is_authenticated());
       setSubmitSuccess(true);
+      setSignup(initialState);
+      navigate("/profile");
     } else {
       setSignupError(true);
     }

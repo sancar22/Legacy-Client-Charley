@@ -1,13 +1,12 @@
 import React, {useState} from "react";
 import { useDispatch } from "react-redux";
+import { BsPencil } from "react-icons/bs";
 
 import { delete_item } from "../../state/actions";
 import apiService from "../../services/apiService";
-import RecipeModal from "../RecipeModal/recipeModal";
-import EditModal from "../EditModal/editModal";
-
+import RecipeModal from "../Modals/RecipeModal/recipeModal";
+import EditModal from "../Modals/EditModal/editModal";
 import * as styles from "./recipe.module.css";
-import { BsPencil } from "react-icons/bs";
 
 
 const Recipe = ({ recipe }) => {
@@ -24,9 +23,9 @@ const Recipe = ({ recipe }) => {
   }
 
   const handleDelete = async () => {
-    dispatch(delete_item(recipe.id));
     try {
       await apiService.deleteRecipe(recipe.id);
+      dispatch(delete_item(recipe.id));
     } catch (e) {
       console.log(e);
     }
@@ -43,13 +42,16 @@ const Recipe = ({ recipe }) => {
         className={styles.container}
         onMouseEnter={() => setInFocus(true)}
         onMouseLeave={() => setInFocus(false)}
+        aria-hidden="true"
       >
-        {recipe.image && <img src={recipe.image} className={styles.image}/>}
+        {recipe.image && <img src={recipe.image} className={styles.image} alt="recipe"/>}
         {!recipe.image && <div className={styles.noImage}></div>}
 
         <div
           className={styles.detailsBox}
-          onClick={handleModal}>
+          onClick={handleModal}
+          aria-hidden="true"
+        >
           <div>
             <div className={styles.details__name}>{recipe.name}</div>
             <div className={styles.details__author}>{recipe.publisher}</div>
@@ -59,12 +61,17 @@ const Recipe = ({ recipe }) => {
         </div>
 
         <div className={styles.buttons}>
-          <div className={inFocus ? styles.deleteIcon__show : styles.deleteIcon__hide}
-               onClick={handleDelete}
+          <div
+            className={inFocus ? styles.deleteIcon__show : styles.deleteIcon__hide}
+            onClick={handleDelete}
+            aria-hidden="true"
           > x
           </div>
-          <div className={inFocus ? styles.editIcon__show : styles.editIcon__hide}
-                onClick={handleEditModal}>
+          <div
+            className={inFocus ? styles.editIcon__show : styles.editIcon__hide}
+            onClick={handleEditModal}
+            aria-hidden="true"
+          >
             <BsPencil/>
           </div>
         </div>

@@ -3,9 +3,9 @@ import { Link, navigate } from "gatsby";
 import { useDispatch } from "react-redux";
 
 import * as styles from "./login.module.css";
-import { attemptLogin} from "../../services/apiService";
+import { attemptLogin} from "../../../services/apiService";
 
-import { set_is_authenticated } from "../../state/actions";
+import { set_is_authenticated } from "../../../state/actions";
 
 
 const initialState = {

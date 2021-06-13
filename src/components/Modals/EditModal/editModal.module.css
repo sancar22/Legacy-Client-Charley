@@ -1,0 +1,96 @@
+.modalShow {
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  position: fixed;
+  width:100%;
+  height: 100%;
+  background: rgb(239,248,254);
+  padding: 3%;
+  padding-left: 7%;
+}
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+.modalHide {
+  display:none;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+}
+.button__close {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: left;
+  cursor: pointer;
+}
+.button__close:hover {
+  background-color: lightgrey;
+}
+.button__close:active {
+  background-color: grey;
+}
+.button__addNote {
+  padding: 10px;
+  font-size: small;
+  font-weight: 300;
+  background-color: white;
+  max-width: 110px;
+}
+.button__addNote:hover {
+  background-color: #d8dcf4
+}
+.button__saveNote {
+  font-size: 1rem;
+  background-color: transparent;
+}
+.button__saveNote:hover {
+  transform: scale(1.3);
+  background-color: transparent;
+}
+
+
+.input__title {
+  font-size: 3rem;
+  font-weight: 200;
+  margin-bottom: 20px;
+  background-color: aliceblue;
+  box-shadow: none;
+  font-family:"Helvetica Neue",Helvetica,Arial;
+  padding: 0;
+  width: 100%;
+  display: inline;
+}
+
+.heading__notes {
+  font-size: 1.5rem;
+  font-weight: 100;
+  color: grey;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+
+.input__note {
+  margin: 0;
+  margin-top: 10px;
+  border: none;
+  width: 40%;
+}
+
+.form__notes {
+  display: flex;
+  align-items: center;
+}
+
+.note {
+  margin: 10px;
+  color: #444444;
+}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as styles from "./modal.module.css";
 
-import { scrapeRecipe } from "../../services/apiService";
+import { scrapeRecipe } from "../../../services/apiService";
 
 const Modal = ({ show, handleClose }) => {
   const [url, setUrl] = useState("");

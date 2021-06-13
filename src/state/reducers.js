@@ -37,6 +37,11 @@ const recipeStore = (state=[], action) => {
         if (recipe.id === action.id) recipe.name = action.name;
       })
       return [...state];
+    case 'ADD_NOTE':
+      state.forEach((recipe) => {
+        if (recipe.id === action.id) recipe.notes.push(action.note);
+      })
+      return [...state];
 
     default: return state;
   }

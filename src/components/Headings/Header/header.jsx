@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Logout from "../Logout/logout";
+import Logout from "../../Auth/Logout/logout";
 import * as styles from "./header.module.css";
 
 const Header = () => {
