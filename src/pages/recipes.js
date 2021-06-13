@@ -35,7 +35,7 @@ const RecipePage = () => {
         <NavBar/>
         {
           recipeStore.length ?
-          recipeStore.map(recipe => <Recipe recipe={recipe}/>) :
+          recipeStore.map(recipe => <Recipe key={recipe.id} recipe={recipe}/>) :
           <div style= {{margin: '40px'}}>no recipes</div>
         }
       </>

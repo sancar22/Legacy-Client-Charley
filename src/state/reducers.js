@@ -32,6 +32,12 @@ const recipeStore = (state=[], action) => {
       return state;
     case 'DELETE_ITEM':
       return state.filter(item => item.id !== action.payload);
+    case 'CHANGE_NAME':
+      state.forEach((recipe) => {
+        if (recipe.id === action.id) recipe.name = action.name;
+      })
+      return [...state];
+
     default: return state;
   }
 }

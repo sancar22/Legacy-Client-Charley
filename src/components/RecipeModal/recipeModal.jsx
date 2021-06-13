@@ -3,6 +3,7 @@ import * as styles from "./recipeModal.module.css";
 
 const RecipeModal = ({ show, handleClose, recipe }) => {
   let i = 1;
+  let j = 1;
 
   return (
     <div className={show ? styles.modalShow : styles.modalHide}>
@@ -15,13 +16,15 @@ const RecipeModal = ({ show, handleClose, recipe }) => {
         <div className={styles.recipeYield}>{recipe.recipeYield}</div>
         <ul>
           {recipe.recipeIngredient.map((ingredient) => (
-            <li className={styles.ingredient}>{ingredient}</li>
+            <li className={styles.ingredient} key={i++}>
+              {ingredient}
+            </li>
           ))}
         </ul>
         <div className={styles.prepareHeader}>Prepare</div>
         {recipe.recipeInstructions.map((step) => (
           <>
-            <h4 className={styles.step__header}>STEP{` ${i++}`}</h4>
+            <h4 className={styles.step__header}>STEP{` ${j++}`}</h4>
             <p className={styles.step__task}>{step}</p>
           </>
         ))}

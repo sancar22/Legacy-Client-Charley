@@ -5,11 +5,13 @@
   padding: 20px;
   display: flex;
   box-shadow: 0 0 2px lightgrey;
+  cursor: pointer;
 }
 .container:hover {
   transform: scale(1.02);
   transition: 1s;
 }
+
 
 .detailsBox {
   width: 85%;
@@ -23,6 +25,17 @@
   justify-content: space-between;
   overflow: hidden;
 }
+.details__keywords {
+  font-size: 0.9rem;
+  color: #444444;
+}
+.details__name{
+  margin-bottom: 10px;
+}
+.details__author{
+  font-size: 0.95rem;
+  color: #444444;
+}
 
 
 .noImage {
@@ -30,13 +43,18 @@
   height: 150px;
   background-color: aliceblue;
 }
-
 .image {
   width: 150px;
   height: 150px;
 }
 
-.showDeleteIcon {
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.deleteIcon__show {
   height: 30px;
   display: flex;
   justify-content: center;
@@ -50,25 +68,35 @@
   cursor: pointer;
 
 }
-.showDeleteIcon:hover {
+.deleteIcon__show:hover {
   background-color: aliceblue;
 }
-.showDeleteIcon:active {
+.deleteIcon__show:active {
   background-color: azure;
 }
-.hideDeleteIcon {
+.deleteIcon__hide {
+  display: none;
+}
+
+.editIcon__show {
+  cursor:pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+}
+.editIcon__show:hover {
+  background-color: aliceblue;
+}
+.editIcon__show:active {
+  background-color: azure;
+}
+.editIcon__hide {
   display: none;
 }
 
 
-.details__keywords {
-  font-size: 0.9rem;
-  color: #444444;
-}
-.details__name{
-  margin-bottom: 10px;
-}
-.details__author{
-  font-size: 0.95rem;
-  color: #444444;
-}
+
+
+
+
