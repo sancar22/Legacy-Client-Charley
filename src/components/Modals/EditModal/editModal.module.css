@@ -105,7 +105,7 @@
   color: #444444;
 }
 
-.checkbox__container {
+.delete__container {
  display: flex;
  align-items: center;
 }

@@ -42,3 +42,9 @@ export const add_note = (id, note) => ({
   id,
   note
 })
+
+export const delete_note = (recipeId, noteId) => ({
+  type: "DELETE_NOTE",
+  recipeId,
+  noteId
+})

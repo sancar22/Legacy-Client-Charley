@@ -43,6 +43,14 @@ const recipeStore = (state=[], action) => {
         if (recipe.id === action.id) recipe.notes.push(action.note);
       })
       return [...state];
+    case 'DELETE_NOTE':
+      state.forEach((recipe) => {
+        if (recipe.id === action.recipeId) {
+          const filtered = recipe.notes.filter(note => note.id !== action.noteId)
+          recipe.notes = filtered;
+        }
+      })
+      return [...state]
 
     default: return state;
   }

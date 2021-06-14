@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import uuid from "node-uuid";
 
-import { change_name, add_note } from "../../../state/actions";
+import { change_name, add_note, delete_note } from "../../../state/actions";
 import apiService from "../../../services/apiService";
 import * as styles from "./editModal.module.css";
 
@@ -13,18 +13,10 @@ const EditModal = ({ show, handleClose, recipe }) => {
   // display states
   const [notes, setNotes] = useState(recipe.notes);
   const [editMode, setEditMode] = useState(false);
-
-  // set up checkbox state
-  const initialCheckboxState =  {};
-  notes.forEach((note) => {
-     initialCheckboxState[note.id] = false;
-  })
-  console.log(initialCheckboxState);
-
   // form management
   const [nameInput, setNameInput] = useState(recipe.name);
   const [noteInput, setNoteInput] = useState("");
-  const [checkboxInput, setCheckboxInput] = useState(initialCheckboxState);
+
   const dispatch = useDispatch();
 
   // title change
@@ -65,15 +57,15 @@ const EditModal = ({ show, handleClose, recipe }) => {
     }
   };
 
-  // delete notes
-  const handleCheckboxChange = ({target}) => {
-    const temp = {...checkboxInput};
-    temp[target.id] = !temp[target.id];
-    setCheckboxInput(temp);
-  }
-  const handleDeleteSubmit = (e) => {
-    e.preventDefault();
-    setEditMode(false);
+  const handleDelete = async (e) => {
+    const noteId = e.target.id;
+    try {
+      await apiService.deleteNote(recipe.id, noteId);
+      dispatch(delete_note(recipe.id, noteId));
+      setNotes(oldNotes => oldNotes.filter(note => note.id !== noteId));
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   return (
@@ -117,23 +109,14 @@ const EditModal = ({ show, handleClose, recipe }) => {
                   </button>
                 </form>
 
-                <form onSubmit={handleDeleteSubmit} className={styles.form__deleteNotes}>
-                  {
-                    notes.map((note, index) => (
-                      <div className={styles.checkbox__container} key={index}>
-                        <input
-                          type="checkbox"
-                          id={note.id}
-                          className={styles.input__checkbox}
-                          checked={checkboxInput[note.id]}
-                          onChange={handleCheckboxChange}
-                        />
-                        <span>{note.text}</span>
-                      </div>
-                    ))
-                  }
-                  <button type="submit"></button>
-                </form>
+                {
+                  notes.map((note, index) => (
+                    <div key={index} className={styles.delete__container}>
+                      <button id={note.id} onClick={handleDelete}>x</button>
+                      <p>{note.text}</p>
+                    </div>
+                  ))
+                }
         </>
       ) :
       <ul>

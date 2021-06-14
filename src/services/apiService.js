@@ -1,6 +1,6 @@
 
-const BASE_URL = "https://chef-share-server.herokuapp.com";
-//const BASE_URL = "http://localhost:3000"
+//const BASE_URL = "https://chef-share-server.herokuapp.com";
+const BASE_URL = "http://localhost:3000"
 
 
 const attemptLogin = (login) => {
@@ -90,6 +90,18 @@ const addNote = (id, note) => {
   })
 }
 
+const deleteNote = (id, noteId) => {
+  let token = localStorage.getItem('accessToken');
+  return fetch(BASE_URL+'/deleteNote', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer: ${token}`
+    },
+    body: JSON.stringify({id, noteId})
+  })
+}
+
 const getFriends = () => {
   let token = localStorage.getItem('accessToken');
   return fetch(BASE_URL+'/users', {
@@ -111,5 +123,7 @@ const getFriendStore = (username) => {
 
 
 module.exports = {
-  attemptLogin, attemptSignup, logout, fetchProfileData, scrapeRecipe, deleteRecipe, nameChange, addNote, getFriends, getFriendStore
+  attemptLogin, attemptSignup, logout, fetchProfileData,
+  scrapeRecipe, deleteRecipe, nameChange, addNote, deleteNote,
+  getFriends, getFriendStore
 }
