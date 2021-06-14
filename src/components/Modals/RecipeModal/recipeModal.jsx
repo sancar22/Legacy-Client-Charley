@@ -4,7 +4,6 @@ import * as styles from "./recipeModal.module.css";
 const RecipeModal = ({ show, handleClose, recipe }) => {
   let i = 0;
   let j = 0;
-  let k = 0;
 
   return (
     <div className={show ? styles.modalShow : styles.modalHide}>
@@ -37,8 +36,8 @@ const RecipeModal = ({ show, handleClose, recipe }) => {
           <>
             <div className={styles.prepareHeader}>Notes</div>
             {recipe.notes.map((note) => (
-              <li key={k++} className={styles.text__note}>
-                {note}
+              <li key={note.id} className={styles.text__note}>
+                {note.text}
               </li>
             ))}
           </>

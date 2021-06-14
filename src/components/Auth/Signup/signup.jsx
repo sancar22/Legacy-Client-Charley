@@ -41,11 +41,11 @@ const Signup = () => {
       navigate("/profile");
     } else {
       if (response.status === 403) {
-        setErrorText("user is already registered");
+        setErrorText("This email is already in use by another account");
       } else if (response.status === 409) {
-        setErrorText("this username is taken");
+        setErrorText("This username is already taken");
       } else {
-        setErrorText("sign up error, please try again");
+        setErrorText("Sign up error, please try again");
       }
       setSignupError(true);
     }

@@ -43,6 +43,7 @@
   font-weight: 300;
   background-color: white;
   max-width: 110px;
+  cursor: pointer;
 }
 .button__addNote:hover {
   background-color: #d8dcf4
@@ -68,6 +69,10 @@
   width: 100%;
   display: inline;
 }
+.input__checkbox {
+  width: auto;
+  display: block;
+}
 
 .heading__notes {
   font-size: 1.5rem;
@@ -85,12 +90,22 @@
   width: 40%;
 }
 
-.form__notes {
+.form__addNotes {
   display: flex;
   align-items: center;
+}
+
+.form__deleteNotes{
+  display: flex;
+  flex-direction: column;
 }
 
 .note {
   margin: 10px;
   color: #444444;
+}
+
+.checkbox__container {
+ display: flex;
+ align-items: center;
 }

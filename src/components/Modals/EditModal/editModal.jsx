@@ -1,30 +1,42 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import uuid from "node-uuid";
 
 import { change_name, add_note } from "../../../state/actions";
 import apiService from "../../../services/apiService";
 import * as styles from "./editModal.module.css";
 
-const EditModal = ({ show, handleClose, recipe }) => {
-  const [name, setName] = useState(recipe.name);
-  const [note, setNote] = useState("");
-  const [notes, setNotes] = useState(recipe.notes);
-  const [addNote, setAddNote] = useState(false);
-  const dispatch = useDispatch();
-  let i = 0;
 
+
+const EditModal = ({ show, handleClose, recipe }) => {
+
+  // display states
+  const [notes, setNotes] = useState(recipe.notes);
+  const [editMode, setEditMode] = useState(false);
+
+  // set up checkbox state
+  const initialCheckboxState =  {};
+  notes.forEach((note) => {
+     initialCheckboxState[note.id] = false;
+  })
+  console.log(initialCheckboxState);
+
+  // form management
+  const [nameInput, setNameInput] = useState(recipe.name);
+  const [noteInput, setNoteInput] = useState("");
+  const [checkboxInput, setCheckboxInput] = useState(initialCheckboxState);
+  const dispatch = useDispatch();
+
+  // title change
   const handleChange = ({ target }) => {
-    setName(target.value);
-  };
-  const handleNoteChange = ({ target }) => {
-    setNote(target.value);
+    setNameInput(target.value);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (name !== recipe.name) {
-        await apiService.nameChange(recipe.id, name);
-        dispatch(change_name(recipe.id, name));
+      if (nameInput !== recipe.name) {
+        await apiService.nameChange(recipe.id, nameInput);
+        dispatch(change_name(recipe.id, nameInput));
       }
       handleClose();
     } catch (e) {
@@ -32,24 +44,41 @@ const EditModal = ({ show, handleClose, recipe }) => {
     }
   };
 
+  // adding notes
+  const handleNoteChange = ({ target }) => {
+    setNoteInput(target.value);
+  };
   const handleNoteSubmit = async (e) => {
     e.preventDefault();
-    setAddNote(false);
-    if (note) {
+    setEditMode(false);
+
+    if (noteInput) {
+      const newNote = {id: uuid.v4(), text: noteInput}
       try {
-        await apiService.addNote(recipe.id, note);
-        setNotes((oldNotes) => [...oldNotes, note]);
-        dispatch(add_note(recipe.id, note));
-        setNote("");
-        i = 0;
+        await apiService.addNote(recipe.id, newNote);
+        setNotes((oldNotes) => [...oldNotes, newNote]);
+        dispatch(add_note(recipe.id, newNote));
+        setNoteInput("");
       } catch (e) {
         console.log(e);
       }
     }
   };
 
+  // delete notes
+  const handleCheckboxChange = ({target}) => {
+    const temp = {...checkboxInput};
+    temp[target.id] = !temp[target.id];
+    setCheckboxInput(temp);
+  }
+  const handleDeleteSubmit = (e) => {
+    e.preventDefault();
+    setEditMode(false);
+  }
+
   return (
     <div className={show ? styles.modalShow : styles.modalHide}>
+
       <form onSubmit={handleSubmit}>
         <div className={styles.buttons}>
           <div
@@ -62,38 +91,61 @@ const EditModal = ({ show, handleClose, recipe }) => {
           <button type="submit">save</button>
         </div>
         <input
-          value={name}
+          value={nameInput}
           onChange={handleChange}
           className={styles.input__title}
         />
       </form>
 
       <div className={styles.heading__notes}>Notes</div>
-      <div className={styles.button__addNote} onClick={() => setAddNote(true)} aria-hidden="true">
-        add a new note!
+      <div
+        className={styles.button__addNote}
+        onClick={() => setEditMode(!editMode)}
+        aria-hidden="true"
+      >
+        edit your notes!
       </div>
-      {addNote ? (
-        <form className={styles.form__notes} onSubmit={handleNoteSubmit}>
-          <input
-            className={styles.input__note}
-            value={note}
-            onChange={handleNoteChange}
-          ></input>
-          <button className={styles.button__saveNote} type="submit" >
-            <span aria-hidden="true">📩</span>
-          </button>
-        </form>
-      ) : null}
+      {editMode ? (  <>
+                <form className={styles.form__addNotes} onSubmit={handleNoteSubmit}>
+                  <input
+                    className={styles.input__note}
+                    value={noteInput}
+                    onChange={handleNoteChange}
+                  />
+                  <button className={styles.button__saveNote} type="submit">
+                    <span aria-hidden="true">📩</span>
+                  </button>
+                </form>
 
+                <form onSubmit={handleDeleteSubmit} className={styles.form__deleteNotes}>
+                  {
+                    notes.map((note, index) => (
+                      <div className={styles.checkbox__container} key={index}>
+                        <input
+                          type="checkbox"
+                          id={note.id}
+                          className={styles.input__checkbox}
+                          checked={checkboxInput[note.id]}
+                          onChange={handleCheckboxChange}
+                        />
+                        <span>{note.text}</span>
+                      </div>
+                    ))
+                  }
+                  <button type="submit"></button>
+                </form>
+        </>
+      ) :
       <ul>
-        {notes.length
-          ? notes.map((note) => (
-              <li key={i++} className={styles.note}>
-                {note}
-              </li>
-            ))
-          : null}
+        {
+          notes.map((note) => (
+            <li key={note.id} className={styles.note}>{note.text}</li>
+          ))
+        }
       </ul>
+    }
+
+
     </div>
   );
 };
