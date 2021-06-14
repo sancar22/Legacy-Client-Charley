@@ -19,7 +19,13 @@ const NavBar = () => {
       >
         home
       </div>
-      <div className={styles.navElement}>visit friends</div>
+      <div
+        className={styles.navElement}
+        onClick={() => navigate("/visitFriends")}
+        aria-hidden="true"
+      >
+        visit friends
+      </div>
     </div>
   );
 };
