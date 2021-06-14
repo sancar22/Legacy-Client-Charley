@@ -18,7 +18,6 @@ const Signup = () => {
   const [signup, setSignup] = useState(initialState);
   const [signupError, setSignupError] = useState(false);
   const [errorText, setErrorText] = useState("");
-  const [submitSuccess, setSubmitSuccess] = useState(false);
   const dispatch = useDispatch();
 
   const handleLogin = ({ target }) => {
@@ -37,10 +36,7 @@ const Signup = () => {
     if (response.ok) {
       let json = await response.json();
       localStorage.setItem("accessToken", json.accessToken);
-
       dispatch(set_is_authenticated());
-      setSubmitSuccess(true);
-
       setSignup(initialState);
       navigate("/profile");
     } else {
@@ -80,10 +76,6 @@ const Signup = () => {
         />
 
         {signupError ? <p className={styles.errorText}>{errorText}</p> : null}
-
-        {submitSuccess ? (
-          <p className={styles.successText}>success! login to continue</p>
-        ) : null}
 
         <button type="submit" disabled={validateForm()}>
           signup
