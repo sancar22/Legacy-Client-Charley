@@ -30,11 +30,15 @@
   color: #444444;
 }
 .details__name{
-  margin-bottom: 10px;
 }
 .details__author{
   font-size: 0.95rem;
   color: #444444;
+}
+.details__origin {
+  font-size: 0.7rem;
+  margin-bottom: 10px;
+  color: orange;
 }
 
 

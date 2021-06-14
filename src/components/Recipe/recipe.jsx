@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BsPencil } from "react-icons/bs";
 
 import { delete_item, add_item } from "../../state/actions";
@@ -14,6 +14,7 @@ const Recipe = ({ recipe, remove, edit, save}) => {
   const [modalStatus, setModalStatus] = useState(false);
   const [editModalStatus, setEditModalStatus] = useState(false);
   const [saved, setSaved] = useState(false);
+  const me = useSelector((state) => state.username);
   const dispatch = useDispatch();
 
   const handleModal = () => {
@@ -68,6 +69,11 @@ const Recipe = ({ recipe, remove, edit, save}) => {
         >
           <div>
             <div className={styles.details__name}>{recipe.name}</div>
+            {recipe.origin === me ? null : (
+              <div className={styles.details__origin}>
+                {`from chef ${recipe.origin}`}
+              </div>
+            )}
             <div className={styles.details__author}>{recipe.publisher}</div>
             <div className={styles.details__author}>{recipe.author}</div>
           </div>
@@ -77,9 +83,7 @@ const Recipe = ({ recipe, remove, edit, save}) => {
         <div className={styles.buttons}>
           {remove ? (
             <div
-              className={
-                inFocus ? styles.button__show : styles.button__hide
-              }
+              className={inFocus ? styles.button__show : styles.button__hide}
               onClick={handleDelete}
               aria-hidden="true"
             >
@@ -98,12 +102,16 @@ const Recipe = ({ recipe, remove, edit, save}) => {
               <BsPencil />
             </div>
           ) : null}
-          {save ? <div
-             className={inFocus ? styles.button__show : styles.button__hide}
-             onClick={saved ? handleDelete : handleSave}
-             aria-hidden="true"
-           > {saved ? 'x' : '+'} </div>: null
-          }
+          {save ? (
+            <div
+              className={inFocus ? styles.button__show : styles.button__hide}
+              onClick={saved ? handleDelete : handleSave}
+              aria-hidden="true"
+            >
+              {" "}
+              {saved ? "x" : "+"}{" "}
+            </div>
+          ) : null}
         </div>
       </div>
       <RecipeModal
