@@ -26,6 +26,11 @@ export const rewrite_store = (store) => ({
   payload: store
 });
 
+export const add_item = (recipe) => ({
+  type: "ADD_ITEM",
+  recipe
+})
+
 export const delete_item = (id) => ({
   type: "DELETE_ITEM",
   payload: id

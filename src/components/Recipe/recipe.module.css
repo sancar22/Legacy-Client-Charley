@@ -54,7 +54,7 @@
   flex-direction: column;
 }
 
-.deleteIcon__show {
+.button__show {
   height: 30px;
   display: flex;
   justify-content: center;
@@ -68,30 +68,30 @@
   cursor: pointer;
 
 }
-.deleteIcon__show:hover {
+.button__show:hover {
   background-color: aliceblue;
 }
-.deleteIcon__show:active {
+.button__show:active {
   background-color: azure;
 }
-.deleteIcon__hide {
+.button__hide {
   display: none;
 }
 
-.editIcon__show {
+.editButton__show {
   cursor:pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 30px;
 }
-.editIcon__show:hover {
+.editButton__show:hover {
   background-color: aliceblue;
 }
-.editIcon__show:active {
+.editButton__show:active {
   background-color: azure;
 }
-.editIcon__hide {
+.editButton__hide {
   display: none;
 }
 

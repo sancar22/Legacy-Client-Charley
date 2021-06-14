@@ -28,21 +28,29 @@ const username = (state = 'nobody', action) => {
 
 const recipeStore = (state=[], action) => {
   switch (action.type) {
+
     case 'REWRITE_STORE':
       state = [...action.payload];
       return state;
+
     case 'DELETE_ITEM':
       return state.filter(item => item.id !== action.payload);
+
+    case 'ADD_ITEM':
+      return [...state, action.recipe]
+
     case 'CHANGE_NAME':
       state.forEach((recipe) => {
         if (recipe.id === action.id) recipe.name = action.name;
       })
       return [...state];
+
     case 'ADD_NOTE':
       state.forEach((recipe) => {
         if (recipe.id === action.id) recipe.notes.push(action.note);
       })
       return [...state];
+
     case 'DELETE_NOTE':
       state.forEach((recipe) => {
         if (recipe.id === action.recipeId) {
