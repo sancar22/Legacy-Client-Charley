@@ -9,7 +9,7 @@ import EditModal from "../Modals/EditModal/editModal";
 import * as styles from "./recipe.module.css";
 
 
-const Recipe = ({ recipe, remove, edit, save}) => {
+const Recipe = ({ recipe, remove, edit, save, self}) => {
   const [inFocus, setInFocus] = useState(false);
   const [modalStatus, setModalStatus] = useState(false);
   const [editModalStatus, setEditModalStatus] = useState(false);
@@ -69,11 +69,14 @@ const Recipe = ({ recipe, remove, edit, save}) => {
         >
           <div>
             <div className={styles.details__name}>{recipe.name}</div>
-            {recipe.origin === me ? null : (
-              <div className={styles.details__origin}>
-                {`from chef ${recipe.origin}`}
-              </div>
-            )}
+            {
+              self ? <>
+              {recipe.origin === me ? null : (
+                <div className={styles.details__origin}>
+                  {`from chef ${recipe.origin}`}
+                </div>
+              )} </>: null
+            }
             <div className={styles.details__author}>{recipe.publisher}</div>
             <div className={styles.details__author}>{recipe.author}</div>
           </div>
