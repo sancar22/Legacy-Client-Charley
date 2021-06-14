@@ -31,7 +31,7 @@ const RecipePage = () => {
      isAuthenticated && <>
         <Header/>
         <NavBar/>
-        {recipeStore.length? <RecipeList recipeStore={recipeStore}/> : null}
+        {recipeStore.length? <RecipeList recipeStore={recipeStore} viewAsSelf={true}/> : null}
       </>
    }
   </> );

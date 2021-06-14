@@ -9,7 +9,7 @@ import EditModal from "../Modals/EditModal/editModal";
 import * as styles from "./recipe.module.css";
 
 
-const Recipe = ({ recipe }) => {
+const Recipe = ({ recipe, remove, edit, save}) => {
   const [inFocus, setInFocus] = useState(false);
   const [modalStatus, setModalStatus] = useState(false);
   const [editModalStatus, setEditModalStatus] = useState(false);
@@ -61,19 +61,22 @@ const Recipe = ({ recipe }) => {
         </div>
 
         <div className={styles.buttons}>
-          <div
-            className={inFocus ? styles.deleteIcon__show : styles.deleteIcon__hide}
-            onClick={handleDelete}
-            aria-hidden="true"
-          > x
-          </div>
-          <div
-            className={inFocus ? styles.editIcon__show : styles.editIcon__hide}
-            onClick={handleEditModal}
-            aria-hidden="true"
-          >
-            <BsPencil/>
-          </div>
+          {remove ? <div
+              className={inFocus ? styles.deleteIcon__show : styles.deleteIcon__hide}
+              onClick={handleDelete}
+              aria-hidden="true"
+            > x
+            </div> : null
+          }
+          { edit ? <div
+              className={inFocus ? styles.editIcon__show : styles.editIcon__hide}
+              onClick={handleEditModal}
+              aria-hidden="true"
+            >
+              <BsPencil/>
+            </div> : null
+          }
+          { save ? <div>+</div> : null}
         </div>
 
       </div>

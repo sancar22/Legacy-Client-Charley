@@ -45,7 +45,7 @@ const VisitFriendsPage = () => {
           <Select options={options} onChange={handleSelect}/>
         </div>
         {
-          friendStore.length ? <RecipeList recipeStore={friendStore}/> : null
+          friendStore.length ? <RecipeList recipeStore={friendStore} viewAsSelf={false}/> : null
         }
       </>
 
