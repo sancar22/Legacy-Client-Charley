@@ -6,6 +6,8 @@ import apiService from "../../../services/apiService";
 import { set_is_authenticated } from "../../../state/actions";
 import * as styles from "./signup.module.css";
 
+
+
 const initialState = {
   email: "",
   password: "",
@@ -15,6 +17,7 @@ const initialState = {
 const Signup = () => {
   const [signup, setSignup] = useState(initialState);
   const [signupError, setSignupError] = useState(false);
+  const [errorText, setErrorText] = useState("");
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const dispatch = useDispatch();
 
@@ -30,14 +33,24 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await apiService.attemptSignup(signup);
+
     if (response.ok) {
       let json = await response.json();
       localStorage.setItem("accessToken", json.accessToken);
+
       dispatch(set_is_authenticated());
       setSubmitSuccess(true);
+
       setSignup(initialState);
       navigate("/profile");
     } else {
+      if (response.status === 403) {
+        setErrorText("user is already registered");
+      } else if (response.status === 409) {
+        setErrorText("this username is taken");
+      } else {
+        setErrorText("sign up error, please try again");
+      }
       setSignupError(true);
     }
   };
@@ -66,9 +79,7 @@ const Signup = () => {
           onChange={handleLogin}
         />
 
-        {signupError ? (
-          <p className={styles.errorText}>user already registered</p>
-        ) : null}
+        {signupError ? <p className={styles.errorText}>{errorText}</p> : null}
 
         {submitSuccess ? (
           <p className={styles.successText}>success! login to continue</p>
