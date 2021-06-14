@@ -36,12 +36,15 @@ const EditModal = ({ show, handleClose, recipe }) => {
     e.preventDefault();
     setAddNote(false);
     if (note) {
-      console.log(recipe.id);
-      await apiService.addNote(recipe.id, note);
-      dispatch(add_note(recipe.id, note));
-      setNotes((oldNotes) => [...oldNotes, note]);
-      setNote("");
-      i = 0;
+      try {
+        await apiService.addNote(recipe.id, note);
+        setNotes((oldNotes) => [...oldNotes, note]);
+        dispatch(add_note(recipe.id, note));
+        setNote("");
+        i = 0;
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
@@ -66,7 +69,7 @@ const EditModal = ({ show, handleClose, recipe }) => {
       </form>
 
       <div className={styles.heading__notes}>Notes</div>
-      <div className={styles.button__addNote} onClick={() => setAddNote(true)}>
+      <div className={styles.button__addNote} onClick={() => setAddNote(true)} aria-hidden="true">
         add a new note!
       </div>
       {addNote ? (
@@ -76,7 +79,7 @@ const EditModal = ({ show, handleClose, recipe }) => {
             value={note}
             onChange={handleNoteChange}
           ></input>
-          <button className={styles.button__saveNote} type="submit">
+          <button className={styles.button__saveNote} type="submit" >
             <span aria-hidden="true">📩</span>
           </button>
         </form>

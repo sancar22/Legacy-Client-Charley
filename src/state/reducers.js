@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import storage from 'redux-persist/lib/storage';
 
 
 const isAuthenticated = (state = false, action) => {
@@ -48,11 +49,19 @@ const recipeStore = (state=[], action) => {
 }
 
 
-const reducers = combineReducers({
+const appReducer = combineReducers({
   isAuthenticated,
   username,
   recipeStore
 });
 
+const rootReducer = (state, action) => {
+  if (action.type === 'LOGOUT_USER') {
+    storage.removeItem('persist:root');
+    return appReducer(undefined, action)
+  }
+  return appReducer(state, action)
+}
 
-export default reducers;
+
+export default rootReducer;

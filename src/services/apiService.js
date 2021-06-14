@@ -78,16 +78,15 @@ const nameChange = (id, name) => {
   })
 }
 
-const addNote = (recipeId, note) => {
+const addNote = (id, note) => {
   let token = localStorage.getItem('accessToken');
-  console.log(recipeId);
   return fetch(BASE_URL+'/addNote', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer: ${token}`
     },
-    body: JSON.stringify({recipeId, note})
+    body: JSON.stringify({id, note})
   })
 }
 
