@@ -19,3 +19,8 @@
 .navElement:hover {
   transform: scale(1.1);
 }
+
+.text {
+  text-decoration: none;
+  color: black;
+}
