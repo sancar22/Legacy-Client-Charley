@@ -15,6 +15,7 @@ const Modal = ({ show, handleClose }) => {
   const handleChange = ({ target }) => {
     setUrl(target.value);
     setError(false);
+    setSuccess(false);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
