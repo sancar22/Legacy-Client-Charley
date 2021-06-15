@@ -5,11 +5,7 @@ import "../styles/global.css";
 
 const IndexPage = () => {
   return (
-    <main>
-      <h1>Welcome to Chef Share</h1>
       <Login/>
-    </main>
   )
 }
-
 export default IndexPage

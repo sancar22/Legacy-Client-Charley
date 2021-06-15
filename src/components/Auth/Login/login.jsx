@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Link, navigate } from "gatsby";
 import { useDispatch } from "react-redux";
 
-import * as styles from "./login.module.css";
-import { attemptLogin} from "../../../services/apiService";
-
+import { attemptLogin } from "../../../services/apiService";
 import { set_is_authenticated } from "../../../state/actions";
+import logo from "../../../images/bighat.png";
+import * as styles from "./login.module.css";
 
 
 const initialState = {
@@ -47,12 +47,14 @@ const Login = () => {
 
 
   return (
-    <div >
+    <div className={styles.container}>
+      <img src={logo} className={styles.logo} />
       <form onSubmit={handleSubmit} className={styles.loginForm}>
+        <p className={styles.title}>welcome to chef share</p>
         <input
           type="email"
           name="email"
-          placeholder="your email"
+          placeholder="email"
           value={login.email}
           onChange={handleLogin}
         />
