@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 
 import apiService from "../../../services/apiService";
 import { set_is_authenticated } from "../../../state/actions";
+import logo from "../../../images/bighat.png";
 import * as styles from "./signup.module.css";
-
 
 
 const initialState = {
@@ -52,12 +52,14 @@ const Signup = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
+      <img src={logo} className={styles.logo} alt='logo'/>
       <form onSubmit={handleSubmit} className={styles.signupForm}>
+        <p className={styles.title}>chef signup</p>
         <input
           type="email"
           name="email"
-          placeholder="your email"
+          placeholder="email"
           value={signup.email}
           onChange={handleLogin}
         />

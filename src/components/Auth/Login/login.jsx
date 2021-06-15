@@ -48,7 +48,7 @@ const Login = () => {
 
   return (
     <div className={styles.container}>
-      <img src={logo} className={styles.logo} />
+      <img src={logo} className={styles.logo} alt="logo" />
       <form onSubmit={handleSubmit} className={styles.loginForm}>
         <p className={styles.title}>welcome to chef share</p>
         <input
