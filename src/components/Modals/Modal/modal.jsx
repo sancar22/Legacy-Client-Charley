@@ -22,11 +22,14 @@ const Modal = ({ show, handleClose }) => {
       apiService
         .scrapeRecipe(url)
         .then((res) => {
-          setUrl("");
-          setSuccess(true);
-        })
-        .catch((e) => {
-          setError(true);
+          if (res.ok) {
+            setUrl("");
+            setSuccess(true);
+            setError(false);
+          } else {
+            setError(true);
+            setSuccess(false);
+          }
         })
     );
   };
@@ -56,13 +59,7 @@ const Modal = ({ show, handleClose }) => {
           ) : null}
 
           <button type="submit" disabled={!url}>
-            
-            
-            
             submit
-          
-          
-          
           </button>
         </form>
 
