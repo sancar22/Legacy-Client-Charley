@@ -29,18 +29,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // const response = await attemptLogin(login);
-
-    // if (response.ok) {
-    //   dispatch(set_is_authenticated());
-    //   let json = await response.json();
-    //   localStorage.setItem('accessToken', json.accessToken);
-    //   setLogin(initialState);
-    //   navigate('/profile');
-    // } else {
-    //   setLoginError(true);
-    // }
     trackPromise(apiService.attemptLogin(login)
       .then(res => res.json())
       .then(res => {
