@@ -29,11 +29,20 @@
   padding-right: 40px;
 }
 
-.headerText{
+.text__header{
   align-self:flex-start;
   font-weight: 500;
   font-size: 1.2rem;
 }
+
+.text__success {
+  font-weight: 200;
+}
+.text__error {
+  color: red;
+  font-size: small;
+}
+
 
 .close {
   position: absolute;
@@ -53,7 +62,3 @@
   width: 100%;
 }
 
-.errorText {
-  color: red;
-  font-size: small;
-}

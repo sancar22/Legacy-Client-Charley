@@ -17,4 +17,16 @@
   font-size: 1rem;
 }
 
+.left__container {
+  display: flex;
+  align-items: center;
+}
 
+.logo {
+  width: 30px;
+  margin-right: 2px;
+}
+
+.name {
+  font-weight: 300;
+}

@@ -3,7 +3,7 @@ import { Link, navigate } from "gatsby";
 import { useDispatch } from "react-redux";
 import { trackPromise } from "react-promise-tracker";
 
-import LoadingIndicator from "../../LoadingIndicator/loadingIndicator";
+import LoadingInd from "../../LoadingInd/loadingInd";
 import apiService from "../../../services/apiService";
 import { set_is_authenticated } from "../../../state/actions";
 import logo from "../../../images/bighat.png";
@@ -47,7 +47,7 @@ const Signup = () => {
 
   return (
     <div className={styles.container}>
-      <img src={logo} className={styles.logo} alt='logo'/>
+      <img src={logo} className={styles.logo} alt="logo" />
       <form onSubmit={handleSubmit} className={styles.signupForm}>
         <p className={styles.title}>chef signup</p>
         <input
@@ -70,7 +70,7 @@ const Signup = () => {
           value={signup.username}
           onChange={handleLogin}
         />
-        <LoadingIndicator/>
+        <LoadingInd />
         {signupError ? <p className={styles.errorText}>{errorText}</p> : null}
 
         <button type="submit" disabled={validateForm()}>

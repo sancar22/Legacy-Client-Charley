@@ -3,7 +3,7 @@ import { Link, navigate } from "gatsby";
 import { useDispatch } from "react-redux";
 import { trackPromise } from 'react-promise-tracker';
 
-import LoadingIndicator from "../../LoadingIndicator/loadingIndicator";
+import LoadingInd from "../../LoadingInd/loadingInd";
 import apiService from "../../../services/apiService";
 import { set_is_authenticated } from "../../../state/actions";
 import logo from "../../../images/bighat.png";
@@ -62,7 +62,7 @@ const Login = () => {
           value={login.password}
           onChange={handleLogin}
         />
-        <LoadingIndicator/>
+        <LoadingInd />
         {loginError ? (
           <p className={styles.errorText}>user name or password is invalid</p>
         ) : null}
