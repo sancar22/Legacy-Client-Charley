@@ -70,6 +70,7 @@ const EditModal = ({ show, handleClose, recipe }) => {
 
   return (
     <div className={show ? styles.modalShow : styles.modalHide}>
+
       <form onSubmit={handleSubmit}>
         <div className={styles.buttons}>
           <div
@@ -96,37 +97,38 @@ const EditModal = ({ show, handleClose, recipe }) => {
       >
         edit your notes!
       </div>
-      {editMode ? (
-        <>
-          <form className={styles.form__addNotes} onSubmit={handleNoteSubmit}>
-            <input
-              className={styles.input__note}
-              value={noteInput}
-              onChange={handleNoteChange}
-            />
-            <button className={styles.button__saveNote} type="submit">
-              <span aria-hidden="true">📩</span>
-            </button>
-          </form>
+      {editMode ? (  <>
+                <form className={styles.form__addNotes} onSubmit={handleNoteSubmit}>
+                  <input
+                    className={styles.input__note}
+                    value={noteInput}
+                    onChange={handleNoteChange}
+                  />
+                  <button className={styles.button__saveNote} type="submit">
+                    <span aria-hidden="true">📩</span>
+                  </button>
+                </form>
 
-          {notes.map((note, index) => (
-            <div key={index} className={styles.delete__container}>
-              <button id={note.id} onClick={handleDelete}>
-                x
-              </button>
-              <p>{note.text}</p>
-            </div>
-          ))}
+                {
+                  notes.map((note, index) => (
+                    <div key={index} className={styles.delete__container}>
+                      <button id={note.id} onClick={handleDelete}>x</button>
+                      <p>{note.text}</p>
+                    </div>
+                  ))
+                }
         </>
-      ) : (
-        <ul>
-          {notes.map((note, index) => (
-            <li key={index} className={styles.note}>
-              {note.text}
-            </li>
-          ))}
-        </ul>
-      )}
+      ) :
+      <ul>
+        {
+          notes.map((note, index) => (
+            <li key={index} className={styles.note}>{note.text}</li>
+          ))
+        }
+      </ul>
+    }
+
+
     </div>
   );
 };

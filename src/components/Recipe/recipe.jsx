@@ -69,14 +69,15 @@ const Recipe = ({ recipe, remove, edit, save, self}) => {
         >
           <div>
             <div className={styles.details__name}>{recipe.name}</div>
-            {
-              self ? <>
-              {recipe.origin === me ? null : (
-                <div className={styles.details__origin}>
-                  {`from chef ${recipe.origin}`}
-                </div>
-              )} </>: null
-            }
+            {self ? (
+              <>
+                {recipe.origin === me ? null : (
+                  <div className={styles.details__origin}>
+                    {`from chef ${recipe.origin}`}
+                  </div>
+                )}
+              </>
+            ) : null}
             <div className={styles.details__author}>{recipe.publisher}</div>
             <div className={styles.details__author}>{recipe.author}</div>
           </div>
@@ -90,7 +91,6 @@ const Recipe = ({ recipe, remove, edit, save, self}) => {
               onClick={handleDelete}
               aria-hidden="true"
             >
-              {" "}
               x
             </div>
           ) : null}
@@ -111,8 +111,7 @@ const Recipe = ({ recipe, remove, edit, save, self}) => {
               onClick={saved ? handleDelete : handleSave}
               aria-hidden="true"
             >
-              {" "}
-              {saved ? "x" : "+"}{" "}
+              {saved ? "x" : "+"}
             </div>
           ) : null}
         </div>

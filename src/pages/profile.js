@@ -14,15 +14,14 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
 
   useEffect( () => {
-    const accessToken = localStorage.getItem('accessToken');
 
-    const getUserData = async (accessToken ) => {
-      const userData = await (await fetchProfileData(accessToken)).json();
+    const getUserData = async () => {
+      const userData = await (await fetchProfileData()).json();
       dispatch(set_username(userData.username));
     }
 
     if (isAuthenticated) {
-      getUserData(accessToken);
+      getUserData();
     }
 
   }, [isAuthenticated, dispatch])

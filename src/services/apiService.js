@@ -1,137 +1,105 @@
 
-const BASE_URL = "https://chef-share-server.herokuapp.com";
-//const BASE_URL = "http://localhost:3000"
+//const BASE_URL = "https://chef-share-server.herokuapp.com";
+const BASE_URL = "http://localhost:3000"
 
 
-const attemptLogin = (login) => {
-  return fetch(BASE_URL+'/login', {
+const authPost = (route, body) => {
+  let token = localStorage.getItem('accessToken');
+  return fetch(BASE_URL+route, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer: ${token}`
+    },
+    body: JSON.stringify(body)
+  })
+}
+
+const noAuthPost = (route, body) => {
+  return fetch(BASE_URL+route, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(login)
+    body: JSON.stringify(body)
   });
+}
+
+const authGet = (route) => {
+  let token = localStorage.getItem('accessToken');
+  if (route === '/logout') localStorage.removeItem('accessToken');
+  return fetch(BASE_URL+route, {
+    headers: {
+      'Authorization': `Bearer: ${token}`
+    }
+  });
+}
+
+
+// auth
+const attemptLogin = (login) => {
+  return noAuthPost('/login', login);
 };
 
 const attemptSignup = (signup) => {
-  return fetch(BASE_URL+'/signup', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(signup)
-  });
+  return noAuthPost('/signup', signup);
+};
+
+const logout = () => {
+  return authGet('/logout');
+};
+
+const fetchProfileData = () => {
+  return authGet('/profile');
 }
 
-const fetchProfileData = (token) => {
-  return fetch(BASE_URL+'/profile', {
-    headers: {
-      'Authorization': `Bearer: ${token}`
-    }
-  })
-}
 
-const logout = (itemName) => {
-  // pass in 'accessToken'
-  let token = localStorage.getItem(itemName);
-  localStorage.removeItem(itemName)
-  return fetch(BASE_URL + '/logout', {
-    headers: {
-      'Authorization': `Bearer: ${token}`
-    }
-  });
-}
-
+// scraping
 const scrapeRecipe = (url) => {
-  let token = localStorage.getItem('accessToken');
-  return fetch(BASE_URL+'/scrape', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer: ${token}`
-    },
-    body: JSON.stringify({url})
-  }).then(res => res.json());
+  const body = {url};
+  return authPost('/scrape', body);
 }
 
-const deleteRecipe = (id) => {
-  let token = localStorage.getItem('accessToken');
-  return fetch(BASE_URL+'/deleteRecipe', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer: ${token}`
-    },
-    body: JSON.stringify({id})
-  })
-}
 
-const nameChange = (id, name) => {
-  let token = localStorage.getItem('accessToken');
-  return fetch(BASE_URL+'/nameChange', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer: ${token}`
-    },
-    body: JSON.stringify({id, name})
-  })
-}
-
-const addNote = (id, note) => {
-  let token = localStorage.getItem('accessToken');
-  return fetch(BASE_URL+'/addNote', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer: ${token}`
-    },
-    body: JSON.stringify({id, note})
-  })
-}
-
-const deleteNote = (id, noteId) => {
-  let token = localStorage.getItem('accessToken');
-  return fetch(BASE_URL+'/deleteNote', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer: ${token}`
-    },
-    body: JSON.stringify({id, noteId})
-  })
-}
-
+// friends
 const getFriends = () => {
-  let token = localStorage.getItem('accessToken');
-  return fetch(BASE_URL+'/users', {
-    headers: { 'Authorization': `Bearer: ${token}`}
-  })
+  return authGet('/users')
 }
 
 const getFriendStore = (username) => {
-  let token = localStorage.getItem('accessToken');
-  return fetch(BASE_URL+'/getFriendStore', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer: ${token}`
-    },
-    body: JSON.stringify({username})
-  })
+  const body = {username};
+  return authPost('/getFriendStore', body);
 }
 
 const addFromFriend = (recipe) => {
-  let token = localStorage.getItem('accessToken');
-  return fetch(BASE_URL+'/addFromFriend', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer: ${token}`
-    },
-    body: JSON.stringify({recipe})
-  })
+  const body = {recipe};
+  return authPost('/addFromFriend', body);
 }
+
+
+// edits
+const deleteRecipe = (id) => {
+  const body = {id}
+  return authPost('/deleteRecipe', body);
+}
+
+const editRecipe = (id, payload, editAction) => {
+  const body = {id, payload};
+  return authPost(`/editRecipe/${editAction}`, body);
+}
+
+const nameChange = (id, name) => {
+  editRecipe(id, name, 'nameChange');
+};
+
+const addNote = (id, note) => {
+  editRecipe(id, note, 'addNote');
+}
+
+const deleteNote = (id, noteId) => {
+  editRecipe(id, noteId, 'deleteNote');
+}
+
 
 
 module.exports = {

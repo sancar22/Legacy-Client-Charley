@@ -11,7 +11,7 @@ const Logout = () => {
 
   const handleLogout = async () => {
     try {
-      await apiService.logout("accessToken");
+      await apiService.logout();
       dispatch(logout_user());
       navigate("/");
     } catch (e) {

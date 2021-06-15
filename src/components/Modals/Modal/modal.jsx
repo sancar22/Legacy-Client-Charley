@@ -15,7 +15,7 @@ const Modal = ({ show, handleClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const recipeData = await scrapeRecipe(url);
+      const recipeData = await scrapeRecipe(url).then((res) => res.json());
       console.log(recipeData);
       setUrl("");
       handleClose();
