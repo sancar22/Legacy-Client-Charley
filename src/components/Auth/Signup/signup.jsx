@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link, navigate } from "gatsby";
 import { useDispatch } from "react-redux";
+import { trackPromise } from "react-promise-tracker";
+
+import LoadingIndicator from "../../LoadingIndicator/loadingIndicator";
 import apiService from "../../../services/apiService";
 import { set_is_authenticated } from "../../../state/actions";
 import logo from "../../../images/bighat.png";
@@ -28,24 +31,18 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await apiService.attemptSignup(signup);
-
-    if (response.ok) {
-      let json = await response.json();
-      localStorage.setItem("accessToken", json.accessToken);
+    trackPromise(apiService.attemptSignup(signup)
+    .then(res => res.json())
+    .then(res => {
       dispatch(set_is_authenticated());
+      localStorage.setItem('accessToken', res.accessToken);
       setSignup(initialState);
-      navigate("/profile");
-    } else {
-      if (response.status === 403) {
-        setErrorText("This email is already in use by another account");
-      } else if (response.status === 409) {
-        setErrorText("This username is already taken");
-      } else {
-        setErrorText("Sign up error, please try again");
-      }
+      navigate('/profile');
+    })
+    .catch((e) => {
+      setErrorText('This email or username is already in use');
       setSignupError(true);
-    }
+    }));
   };
 
   return (
@@ -73,7 +70,7 @@ const Signup = () => {
           value={signup.username}
           onChange={handleLogin}
         />
-
+        <LoadingIndicator/>
         {signupError ? <p className={styles.errorText}>{errorText}</p> : null}
 
         <button type="submit" disabled={validateForm()}>

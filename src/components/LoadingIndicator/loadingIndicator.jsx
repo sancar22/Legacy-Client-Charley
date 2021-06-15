@@ -1,6 +1,7 @@
 import React from "react";
 import { usePromiseTracker } from "react-promise-tracker";
 import Loader from "react-loader-spinner";
+import * as styles from "./loadingIndicator.module.css";
 
 const LoadingIndicator = () => {
   const { promiseInProgress } = usePromiseTracker();
@@ -8,15 +9,7 @@ const LoadingIndicator = () => {
   return (
     <>
       {promiseInProgress && (
-        <div
-          style={{
-            width: "100%",
-            height: "100",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <div className={styles.loading__container}>
           <Loader type="ThreeDots" color="white" height="100" width="100" />
         </div>
       )}
