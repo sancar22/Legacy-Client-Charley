@@ -13,10 +13,20 @@ module.exports = {
         unsafe: false,
         ignoreFunction: true,
       },
-      // [optional] - if true will clean up after itself on the client, default:
       cleanupOnClient: true,
-      // [optional] - name of key on `window` where serialized state will be stored, default:
       windowKey: '__PRELOADED_STATE__',
+    },
+  },
+  {
+    resolve: `gatsby-plugin-manifest`,
+    options: {
+      name: `Chef Share`,
+      short_name: `Chef Share`,
+      start_url: `/`,
+      background_color: `#f7f0eb`,
+      theme_color: `#a2466c`,
+      display: `standalone`,
+      icon: 'src/images/smallhat.png'
     },
   },
 ],
