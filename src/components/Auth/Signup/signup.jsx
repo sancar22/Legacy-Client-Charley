@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, navigate } from "gatsby";
 import { useDispatch } from "react-redux";
-
 import apiService from "../../../services/apiService";
 import { set_is_authenticated } from "../../../state/actions";
 import logo from "../../../images/bighat.png";
@@ -13,7 +12,6 @@ const initialState = {
   password: "",
   username: "",
 };
-
 const Signup = () => {
   const [signup, setSignup] = useState(initialState);
   const [signupError, setSignupError] = useState(false);
@@ -24,7 +22,6 @@ const Signup = () => {
     setSignup((oldSignup) => ({ ...oldSignup, [target.name]: target.value }));
     setSignupError(false);
   };
-
   const validateForm = () => {
     return !signup.email || !signup.password || !signup.username;
   };
