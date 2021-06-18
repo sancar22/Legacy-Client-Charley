@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import { Link, navigate } from 'gatsby';
 import { useDispatch } from 'react-redux';
 import { trackPromise } from 'react-promise-tracker';
