@@ -5,3 +5,9 @@ export interface ILogin {
 export interface ISignup extends ILogin {
   username?: string;
 }
+export interface IState {
+  isAuthenticated: boolean;
+  username: string;
+  recipeStore: [];
+  _persist: { version: number; rehydrated: boolean };
+}
