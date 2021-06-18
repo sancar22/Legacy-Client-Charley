@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "lib": ["dom", "esnext", "es2015", "es2016", "es2017"],
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "plugins": [{ "name": "typescript-styled-plugin" }],
+    "target": "es6",
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "module": "commonjs",
+    "jsx": "preserve",
+    "strict": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "removeComments": false
+  },
+
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules/*", "public/*", "./dist/**/*"]
+}
