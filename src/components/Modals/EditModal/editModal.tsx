@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import uuid from 'node-uuid';
 
+import { INote, IRecipe } from 'src/interfaces';
 import { change_name, add_note, delete_note } from '../../../state/actions';
 import apiService from '../../../services/apiService';
 import * as styles from './editModal.module.css';
 
-const EditModal = ({ show, handleClose, recipe }) => {
+const EditModal = ({
+  show,
+  handleClose,
+  recipe,
+}: {
+  show: boolean;
+  handleClose: () => void;
+  recipe: IRecipe;
+}) => {
   // display states
   const [notes, setNotes] = useState(recipe.notes);
   const [editMode, setEditMode] = useState(false);
@@ -17,11 +26,11 @@ const EditModal = ({ show, handleClose, recipe }) => {
   const dispatch = useDispatch();
 
   // title change
-  const handleChange = ({ target }) => {
-    setNameInput(target.value);
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setNameInput(event.target.value);
   };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.SyntheticEvent) => {
+    event.preventDefault();
     try {
       if (nameInput !== recipe.name) {
         await apiService.nameChange(recipe.id, nameInput);
@@ -34,11 +43,11 @@ const EditModal = ({ show, handleClose, recipe }) => {
   };
 
   // adding notes
-  const handleNoteChange = ({ target }) => {
-    setNoteInput(target.value);
+  const handleNoteChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setNoteInput(event.target.value);
   };
-  const handleNoteSubmit = async (e) => {
-    e.preventDefault();
+  const handleNoteSubmit = async (event: React.SyntheticEvent) => {
+    event.preventDefault();
     setEditMode(false);
 
     if (noteInput) {
@@ -54,8 +63,8 @@ const EditModal = ({ show, handleClose, recipe }) => {
     }
   };
 
-  const handleDelete = async (e) => {
-    const noteId = e.target.id;
+  const handleDelete = async (event) => {
+    const noteId = event.target.id;
     try {
       await apiService.deleteNote(recipe.id, noteId);
       dispatch(delete_note(recipe.id, noteId));
