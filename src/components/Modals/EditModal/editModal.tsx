@@ -51,7 +51,7 @@ const EditModal = ({
     setEditMode(false);
 
     if (noteInput) {
-      const newNote = { id: uuid.v4(), text: noteInput };
+      const newNote: INote = { id: uuid.v4(), text: noteInput };
       try {
         await apiService.addNote(recipe.id, newNote);
         setNotes((oldNotes) => [...oldNotes, newNote]);
@@ -64,7 +64,7 @@ const EditModal = ({
   };
 
   const handleDelete = async (event) => {
-    const noteId = event.target.id;
+    const noteId: string = event.target.id;
     try {
       await apiService.deleteNote(recipe.id, noteId);
       dispatch(delete_note(recipe.id, noteId));

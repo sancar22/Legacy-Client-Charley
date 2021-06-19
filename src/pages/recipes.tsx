@@ -6,7 +6,7 @@ import Header from '../components/Headings/Header/header';
 import NavBar from '../components/Headings/NavBar/navbar';
 import RecipeList from '../components/RecipeList/recipeList';
 import { rewrite_store } from '../state/actions';
-import { fetchProfileData } from '../services/apiService';
+import apiService from '../services/apiService';
 
 const RecipePage = (): JSX.Element => {
   const isAuthenticated = useSelector<IState>((state) => state.isAuthenticated);
@@ -16,7 +16,8 @@ const RecipePage = (): JSX.Element => {
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
     const getUserData = (accessToken) => {
-      fetchProfileData(accessToken)
+      apiService
+        .fetchProfileData(accessToken)
         .then((res) => res.json())
         .then((userData) => dispatch(rewrite_store(userData.recipeStore)));
     };

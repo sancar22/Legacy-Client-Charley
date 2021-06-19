@@ -15,6 +15,7 @@ const initialState = {
   password: '',
   username: '',
 };
+
 const Signup = (): JSX.Element => {
   const [signup, setSignup] = useState<ISignup | null>(initialState);
   const [signupError, setSignupError] = useState(false);

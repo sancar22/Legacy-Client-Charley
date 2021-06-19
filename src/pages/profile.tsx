@@ -1,19 +1,21 @@
 import React, { useEffect } from 'react';
+import { IState } from 'src/interfaces';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchProfileData } from '../services/apiService';
+import apiService from '../services/apiService';
 import { set_username } from '../state/actions';
 
 import Header from '../components/Headings/Header/header';
 import RecipeAdder from '../components/RecipeAdder/recipeAdder';
 import NavBar from '../components/Headings/NavBar/navbar';
 
-const ProfilePage = () => {
-  const isAuthenticated = useSelector((state) => state.isAuthenticated);
+const ProfilePage = (): JSX.Element => {
+  const isAuthenticated = useSelector<IState>((state) => state.isAuthenticated);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const getUserData = async () => {
-      const userData = await (await fetchProfileData()).json();
+      const response = await apiService.fetchProfileData();
+      const userData = await response.json();
       dispatch(set_username(userData.username));
     };
 
