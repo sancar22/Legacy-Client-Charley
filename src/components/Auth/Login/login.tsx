@@ -14,7 +14,7 @@ const initialState = {
   password: '',
 };
 const Login = (): JSX.Element => {
-  const [login, setLogin] = useState<ILogin | null>(initialState);
+  const [login, setLogin] = useState<ILogin>(initialState);
   const [loginError, setLoginError] = useState(false);
   const dispatch = useDispatch();
 

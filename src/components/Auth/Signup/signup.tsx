@@ -43,7 +43,7 @@ const Signup = (): JSX.Element => {
           setSignup(initialState);
           navigate('/profile');
         })
-        .catch((e) => {
+        .catch(() => {
           setErrorText('This email or username is already in use');
           setSignupError(true);
         }),

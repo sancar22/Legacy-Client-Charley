@@ -1,5 +1,5 @@
-import { Link } from 'gatsby';
 import React from 'react';
+import { Link } from 'gatsby';
 import * as styles from './navbar.module.css';
 
 const NavBar = (): JSX.Element => (

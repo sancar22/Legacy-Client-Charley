@@ -12,7 +12,7 @@ const Modal = ({
 }: {
   show: boolean;
   handleClose: () => void;
-}) => {
+}): JSX.Element => {
   const [url, setUrl] = useState('');
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);

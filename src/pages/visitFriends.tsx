@@ -11,7 +11,7 @@ type User = {
   value: string;
   label: string;
 };
-const VisitFriendsPage = () => {
+const VisitFriendsPage = (): JSX.Element => {
   const isAuthenticated = useSelector<IState>((state) => state.isAuthenticated);
   const [friendStore, setFriendStore] = useState<IRecipe[]>([]);
   const [options, setOptions] = useState<User[]>([]);
