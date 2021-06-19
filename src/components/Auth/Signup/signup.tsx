@@ -17,7 +17,7 @@ const initialState = {
 };
 
 const Signup = (): JSX.Element => {
-  const [signup, setSignup] = useState<ISignup | null>(initialState);
+  const [signup, setSignup] = useState<ISignup>(initialState);
   const [signupError, setSignupError] = useState(false);
   const [errorText, setErrorText] = useState('');
   const dispatch = useDispatch();
@@ -31,8 +31,9 @@ const Signup = (): JSX.Element => {
     setSignupError(false);
   };
   const validateForm = () => !signup?.email || !signup.password || !signup.username;
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+
+  const handleSubmit = (event: React.SyntheticEvent): void => {
+    event.preventDefault();
     trackPromise(
       apiService
         .attemptSignup(signup)

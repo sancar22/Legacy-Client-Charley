@@ -37,7 +37,7 @@ const VisitFriendsPage = (): JSX.Element => {
       }
     }
   }, []);
-
+  // TODO
   const handleSelect = (selected) => {
     apiService
       .getFriendStore(selected.value)

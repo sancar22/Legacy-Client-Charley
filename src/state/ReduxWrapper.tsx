@@ -19,7 +19,7 @@ const root = ({ element }): JSX.Element => (
     <PersistGate
       loading={null}
       persistor={persistor}
-      onBeforeLift={() => handleAuth(store)}
+      onBeforeLift={() => handleAuth()}
     >
       {element}
     </PersistGate>
