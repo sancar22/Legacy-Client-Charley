@@ -38,15 +38,13 @@ const VisitFriendsPage = () => {
     }
   }, []);
 
-  const handleSelect = async (selected) => {
-    try {
-      const store = await apiService
-        .getFriendStore(selected.value)
-        .then((res) => res.json());
-      setFriendStore(store);
-    } catch (e) {
-      console.log(e);
-    }
+  const handleSelect = (selected) => {
+    apiService
+      .getFriendStore(selected.value)
+      .then((res) => res.json())
+      .then((store) => {
+        setFriendStore(store);
+      });
   };
 
   return (

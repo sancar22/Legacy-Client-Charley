@@ -1,7 +1,9 @@
+import { ILogin, INote, IRecipe } from 'src/interfaces';
+
 // const BASE_URL = "https://chef-share-server.herokuapp.com";
 const BASE_URL = 'http://localhost:5000';
 
-const authPost = (route, body) => {
+const authPost = (route: string, body) => {
   const token = localStorage.getItem('accessToken');
   return fetch(BASE_URL + route, {
     method: 'POST',
@@ -13,7 +15,7 @@ const authPost = (route, body) => {
   });
 };
 
-const authPostNoBody = (route) => {
+const authPostNoBody = (route: string) => {
   const token = localStorage.getItem('accessToken');
   console.log(BASE_URL + route);
   return fetch(BASE_URL + route, {
@@ -25,7 +27,7 @@ const authPostNoBody = (route) => {
   });
 };
 
-const noAuthPost = (route, body) => fetch(BASE_URL + route, {
+const noAuthPost = (route: string, body) => fetch(BASE_URL + route, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -33,7 +35,7 @@ const noAuthPost = (route, body) => fetch(BASE_URL + route, {
   body: JSON.stringify(body),
 });
 
-const authGet = (route) => {
+const authGet = (route: string) => {
   const token = localStorage.getItem('accessToken');
   if (route === '/logout') localStorage.removeItem('accessToken');
   return fetch(BASE_URL + route, {
@@ -44,55 +46,47 @@ const authGet = (route) => {
 };
 
 // auth
-const attemptLogin = (login) => noAuthPost('/login', login);
+const attemptLogin = (login: ILogin): Promise<Response> => noAuthPost('/login', login);
 
-const attemptSignup = (signup) => noAuthPost('/signup', signup);
+const attemptSignup = (signup: ISignup): Promise<Response> => noAuthPost('/signup', signup);
 
-const logout = () => authGet('/logout');
+const logout = (): Promise<Response> => authGet('/logout');
 
-const fetchProfileData = () => authGet('/profile');
+const fetchProfileData = (): Promise<Response> => authGet('/profile');
 
 // scraping
-const scrapeRecipe = (url) => {
+const scrapeRecipe = (url): Promise<Response> => {
   const body = { url };
   return authPost('/scrape', body);
 };
 
 // friends
-const getFriends = () => authGet('/users');
+const getFriends = (): Promise<Response> => authGet('/users');
 
-const getFriendStore = (username) => {
+const getFriendStore = (username: string): Promise<Response> => {
   const body = { username };
   return authPost('/getFriendStore', body);
 };
 
-const addFromFriend = (recipe) => {
-  console.log(recipe, 'recipe here');
+const addFromFriend = (recipe: IRecipe): Promise<Response> => {
   const body = { recipe };
   return authPost('/addFromFriend', body);
 };
 
 // edits
-const deleteRecipe = (id) => authPostNoBody(`/deleteRecipe/${id}`);
+const deleteRecipe = (id: string): Promise<Response> => authPostNoBody(`/deleteRecipe/${id}`);
 
-const editRecipe = (id, payload, editAction) => {
+const editRecipe = (id: string, payload, editAction) => {
   const body = { id, payload };
   return authPost(`/editRecipe/${editAction}`, body);
 };
 
-const nameChange = (id, name) => {
-  editRecipe(id, name, 'nameChange');
-};
+const nameChange = (id: string, name: string): Promise<Response> => editRecipe(id, name, 'nameChange');
 
-const addNote = (id, note) => {
-  editRecipe(id, note, 'addNote');
-};
+const addNote = (id: string, note: INote): Promise<Response> => editRecipe(id, note, 'addNote');
 
-const deleteNote = (id, noteId) => {
-  editRecipe(id, noteId, 'deleteNote');
-};
-
-module.exports = {
+const deleteNote = (id: string, noteId: string): Promise<Response> => editRecipe(id, noteId, 'deleteNote');
+const apiService = {
   attemptLogin,
   attemptSignup,
   logout,
@@ -106,3 +100,5 @@ module.exports = {
   getFriendStore,
   addFromFriend,
 };
+
+export default apiService;

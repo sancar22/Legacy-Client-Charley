@@ -96,7 +96,7 @@ const Recipe = ({
         </div>
 
         <div className={styles.buttons}>
-          {remove ? (
+          {remove && (
             <div
               className={inFocus ? styles.button__show : styles.button__hide}
               onClick={handleDelete}
@@ -104,8 +104,8 @@ const Recipe = ({
             >
               x
             </div>
-          ) : null}
-          {edit ? (
+          )}
+          {edit && (
             <div
               className={
                 inFocus ? styles.editButton__show : styles.editButton__hide
@@ -115,8 +115,8 @@ const Recipe = ({
             >
               <BsPencil />
             </div>
-          ) : null}
-          {save ? (
+          )}
+          {save && (
             <div
               className={inFocus ? styles.button__show : styles.button__hide}
               onClick={saved ? handleDelete : handleSave}
@@ -124,7 +124,7 @@ const Recipe = ({
             >
               {saved ? 'x' : '+'}
             </div>
-          ) : null}
+          )}
         </div>
       </div>
       <RecipeModal
