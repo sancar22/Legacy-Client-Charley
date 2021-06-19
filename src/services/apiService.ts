@@ -1,9 +1,11 @@
-import { ILogin, INote, IRecipe } from 'src/interfaces';
+import {
+  ILogin, INote, IRecipe, ISignup,
+} from 'src/interfaces';
 
 // const BASE_URL = "https://chef-share-server.herokuapp.com";
 const BASE_URL = 'http://localhost:5000';
 
-const authPost = (route: string, body) => {
+const authPost = (route: string, body: any) => {
   const token = localStorage.getItem('accessToken');
   return fetch(BASE_URL + route, {
     method: 'POST',
@@ -27,7 +29,7 @@ const authPostNoBody = (route: string) => {
   });
 };
 
-const noAuthPost = (route: string, body) => fetch(BASE_URL + route, {
+const noAuthPost = (route: string, body: any) => fetch(BASE_URL + route, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -55,7 +57,7 @@ const logout = (): Promise<Response> => authGet('/logout');
 const fetchProfileData = (): Promise<Response> => authGet('/profile');
 
 // scraping
-const scrapeRecipe = (url): Promise<Response> => {
+const scrapeRecipe = (url: string): Promise<Response> => {
   const body = { url };
   return authPost('/scrape', body);
 };
@@ -76,7 +78,7 @@ const addFromFriend = (recipe: IRecipe): Promise<Response> => {
 // edits
 const deleteRecipe = (id: string): Promise<Response> => authPostNoBody(`/deleteRecipe/${id}`);
 
-const editRecipe = (id: string, payload, editAction) => {
+const editRecipe = (id: string, payload: any, editAction: string) => {
   const body = { id, payload };
   return authPost(`/editRecipe/${editAction}`, body);
 };

@@ -14,7 +14,6 @@ const RecipePage = (): JSX.Element => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
     const getUserData = () => {
       apiService
         .fetchProfileData()
@@ -23,7 +22,7 @@ const RecipePage = (): JSX.Element => {
     };
 
     if (isAuthenticated) {
-      getUserData(accessToken);
+      getUserData();
     }
   }, [isAuthenticated, dispatch]);
 
@@ -33,7 +32,7 @@ const RecipePage = (): JSX.Element => {
         <>
           <Header />
           <NavBar />
-          {recipeStore.length && (
+          {Array.isArray(recipeStore) && (
             <RecipeList recipeStore={recipeStore} viewAsSelf={true} />
           )}
         </>

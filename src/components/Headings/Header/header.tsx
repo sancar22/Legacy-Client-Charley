@@ -11,7 +11,7 @@ const Header = (): JSX.Element => {
     <div className={styles.container}>
       <div className={styles.left__container}>
         <img src={logo} alt='logo' className={styles.logo} />
-        {username && (
+        {typeof username === 'string' && (
           <div>
             Welcome back chef <span className={styles.name}>{username}</span>
           </div>

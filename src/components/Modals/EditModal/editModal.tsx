@@ -14,7 +14,7 @@ const EditModal = ({
   show: boolean;
   handleClose: () => void;
   recipe: IRecipe;
-}) => {
+}): JSX.Element => {
   // display states
   const [notes, setNotes] = useState<INote[]>(recipe.notes);
   const [editMode, setEditMode] = useState(false);
