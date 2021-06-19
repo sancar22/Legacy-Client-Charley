@@ -2,7 +2,7 @@
 const BASE_URL = 'http://localhost:5000';
 
 const authPost = (route, body) => {
-  let token = localStorage.getItem('accessToken');
+  const token = localStorage.getItem('accessToken');
   return fetch(BASE_URL + route, {
     method: 'POST',
     headers: {
@@ -14,7 +14,7 @@ const authPost = (route, body) => {
 };
 
 const authPostNoBody = (route) => {
-  let token = localStorage.getItem('accessToken');
+  const token = localStorage.getItem('accessToken');
   console.log(BASE_URL + route);
   return fetch(BASE_URL + route, {
     method: 'POST',
@@ -25,18 +25,16 @@ const authPostNoBody = (route) => {
   });
 };
 
-const noAuthPost = (route, body) => {
-  return fetch(BASE_URL + route, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
-};
+const noAuthPost = (route, body) => fetch(BASE_URL + route, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(body),
+});
 
 const authGet = (route) => {
-  let token = localStorage.getItem('accessToken');
+  const token = localStorage.getItem('accessToken');
   if (route === '/logout') localStorage.removeItem('accessToken');
   return fetch(BASE_URL + route, {
     headers: {
@@ -46,21 +44,13 @@ const authGet = (route) => {
 };
 
 // auth
-const attemptLogin = (login) => {
-  return noAuthPost('/login', login);
-};
+const attemptLogin = (login) => noAuthPost('/login', login);
 
-const attemptSignup = (signup) => {
-  return noAuthPost('/signup', signup);
-};
+const attemptSignup = (signup) => noAuthPost('/signup', signup);
 
-const logout = () => {
-  return authGet('/logout');
-};
+const logout = () => authGet('/logout');
 
-const fetchProfileData = () => {
-  return authGet('/profile');
-};
+const fetchProfileData = () => authGet('/profile');
 
 // scraping
 const scrapeRecipe = (url) => {
@@ -69,9 +59,7 @@ const scrapeRecipe = (url) => {
 };
 
 // friends
-const getFriends = () => {
-  return authGet('/users');
-};
+const getFriends = () => authGet('/users');
 
 const getFriendStore = (username) => {
   const body = { username };
@@ -85,9 +73,7 @@ const addFromFriend = (recipe) => {
 };
 
 // edits
-const deleteRecipe = (id) => {
-  return authPostNoBody(`/deleteRecipe/${id}`);
-};
+const deleteRecipe = (id) => authPostNoBody(`/deleteRecipe/${id}`);
 
 const editRecipe = (id, payload, editAction) => {
   const body = { id, payload };

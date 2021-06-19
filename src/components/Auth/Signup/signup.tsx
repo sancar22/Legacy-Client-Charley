@@ -29,8 +29,7 @@ const Signup = (): JSX.Element => {
     setSignup(newSignUp);
     setSignupError(false);
   };
-  const validateForm = () =>
-    !signup?.email || !signup.password || !signup.username;
+  const validateForm = () => !signup?.email || !signup.password || !signup.username;
   const handleSubmit = async (e) => {
     e.preventDefault();
     trackPromise(
@@ -46,7 +45,7 @@ const Signup = (): JSX.Element => {
         .catch((e) => {
           setErrorText('This email or username is already in use');
           setSignupError(true);
-        })
+        }),
     );
   };
 
@@ -75,7 +74,7 @@ const Signup = (): JSX.Element => {
           value={signup?.username}
           onChange={handleLogin}
         />
-        <LoadingInd />
+        <LoadingInd color={'white'} />
         {signupError && <p className={styles.errorText}>{errorText}</p>}
 
         <button type='submit' disabled={validateForm()}>

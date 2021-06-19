@@ -1,7 +1,16 @@
 import React from 'react';
+import { IRecipe } from 'src/interfaces';
 import * as styles from './recipeModal.module.css';
 
-const RecipeModal = ({ show, handleClose, recipe }) => {
+const RecipeModal = ({
+  show,
+  handleClose,
+  recipe,
+}: {
+  show: boolean;
+  handleClose: () => void;
+  recipe: IRecipe;
+}) => {
   let j = 1;
 
   return (

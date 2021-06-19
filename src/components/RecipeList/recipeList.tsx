@@ -1,34 +1,36 @@
 import React from 'react';
+import { IRecipe } from 'src/interfaces';
 import Recipe from '../Recipe/recipe';
 
-const RecipeList = ({ recipeStore, viewAsSelf }) => {
-  return (
-    <>
-      {recipeStore.length
-        ? recipeStore.map((recipe) =>
-            viewAsSelf ? (
-              <Recipe
-                key={recipe.id}
-                recipe={recipe}
-                remove={true}
-                edit={true}
-                save={false}
-                self={true}
-              />
-            ) : (
-              <Recipe
-                key={recipe.id}
-                recipe={recipe}
-                remove={false}
-                edit={false}
-                save={true}
-                self={false}
-              />
-            )
-          )
-        : null}
-    </>
-  );
-};
+const RecipeList = ({
+  recipeStore,
+  viewAsSelf,
+}: {
+  recipeStore: IRecipe[];
+  viewAsSelf: boolean;
+}): JSX.Element => (
+  <>
+    {recipeStore.length
+      && recipeStore.map((recipe: IRecipe) => (viewAsSelf ? (
+          <Recipe
+            key={recipe.id}
+            recipe={recipe}
+            remove={true}
+            edit={true}
+            save={false}
+            self={true}
+          />
+      ) : (
+          <Recipe
+            key={recipe.id}
+            recipe={recipe}
+            remove={false}
+            edit={false}
+            save={true}
+            self={false}
+          />
+      )))}
+  </>
+);
 
 export default RecipeList;

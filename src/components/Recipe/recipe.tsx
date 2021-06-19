@@ -1,18 +1,31 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BsPencil } from 'react-icons/bs';
+import { IRecipe, IState } from 'src/interfaces';
 import { delete_item, add_item } from '../../state/actions';
 import apiService from '../../services/apiService';
 import RecipeModal from '../Modals/RecipeModal/recipeModal';
 import EditModal from '../Modals/EditModal/editModal';
 import * as styles from './recipe.module.css';
 
-const Recipe = ({ recipe, remove, edit, save, self }) => {
+const Recipe = ({
+  recipe,
+  remove,
+  edit,
+  save,
+  self,
+}: {
+  recipe: IRecipe;
+  remove: boolean;
+  edit: boolean;
+  save: boolean;
+  self: boolean;
+}): JSX.Element => {
   const [inFocus, setInFocus] = useState(false);
   const [modalStatus, setModalStatus] = useState(false);
   const [editModalStatus, setEditModalStatus] = useState(false);
   const [saved, setSaved] = useState(false);
-  const me = useSelector((state) => state.username);
+  const me = useSelector<IState>((state) => state.username);
   const dispatch = useDispatch();
 
   const handleModal = () => {

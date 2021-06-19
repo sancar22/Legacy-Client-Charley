@@ -28,7 +28,7 @@ const Modal = ({ show, handleClose }) => {
           setError(true);
           setSuccess(false);
         }
-      })
+      }),
     );
   };
 

@@ -54,7 +54,7 @@ const recipeStore = (state = [], action) => {
       state.forEach((recipe) => {
         if (recipe.id === action.recipeId) {
           const filtered = recipe.notes.filter(
-            (note) => note.id !== action.noteId
+            (note) => note.id !== action.noteId,
           );
           recipe.notes = filtered;
         }
