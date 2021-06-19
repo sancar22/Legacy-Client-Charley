@@ -15,9 +15,9 @@ const RecipePage = (): JSX.Element => {
 
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
-    const getUserData = (accessToken) => {
+    const getUserData = () => {
       apiService
-        .fetchProfileData(accessToken)
+        .fetchProfileData()
         .then((res) => res.json())
         .then((userData) => dispatch(rewrite_store(userData.recipeStore)));
     };

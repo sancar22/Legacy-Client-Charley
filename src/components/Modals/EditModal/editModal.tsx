@@ -1,7 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import uuid from 'node-uuid';
-
 import { INote, IRecipe } from 'src/interfaces';
 import { change_name, add_note, delete_note } from '../../../state/actions';
 import apiService from '../../../services/apiService';
@@ -17,10 +16,10 @@ const EditModal = ({
   recipe: IRecipe;
 }) => {
   // display states
-  const [notes, setNotes] = useState(recipe.notes);
+  const [notes, setNotes] = useState<INote[]>(recipe.notes);
   const [editMode, setEditMode] = useState(false);
   // form management
-  const [nameInput, setNameInput] = useState(recipe.name);
+  const [nameInput, setNameInput] = useState<string>(recipe.name);
   const [noteInput, setNoteInput] = useState('');
 
   const dispatch = useDispatch();
@@ -51,7 +50,7 @@ const EditModal = ({
     setEditMode(false);
 
     if (noteInput) {
-      const newNote: INote = { id: uuid.v4(), text: noteInput };
+      const newNote = { id: uuid.v4(), text: noteInput };
       try {
         await apiService.addNote(recipe.id, newNote);
         setNotes((oldNotes) => [...oldNotes, newNote]);

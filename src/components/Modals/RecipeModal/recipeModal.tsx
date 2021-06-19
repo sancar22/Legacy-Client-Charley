@@ -10,8 +10,8 @@ const RecipeModal = ({
   show: boolean;
   handleClose: () => void;
   recipe: IRecipe;
-}) => {
-  let j = 1;
+}): JSX.Element => {
+  const j = 1;
 
   return (
     <div className={show ? styles.modalShow : styles.modalHide}>
@@ -36,7 +36,7 @@ const RecipeModal = ({
         <div className={styles.prepareHeader}>Prepare</div>
         {recipe.recipeInstructions.map((step, index) => (
           <div key={index}>
-            <h4 className={styles.step__header}>STEP{` ${j++}`}</h4>
+            <h4 className={styles.step__header}>STEP{` ${j + 1}`}</h4>
             <p className={styles.step__task}>{step}</p>
           </div>
         ))}
