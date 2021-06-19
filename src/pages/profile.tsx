@@ -7,40 +7,33 @@ import Header from '../components/Headings/Header/header';
 import RecipeAdder from '../components/RecipeAdder/recipeAdder';
 import NavBar from '../components/Headings/NavBar/navbar';
 
-
 const ProfilePage = () => {
-
-  const isAuthenticated = useSelector(state => state.isAuthenticated);
+  const isAuthenticated = useSelector((state) => state.isAuthenticated);
   const dispatch = useDispatch();
 
-  useEffect( () => {
-
+  useEffect(() => {
     const getUserData = async () => {
       const userData = await (await fetchProfileData()).json();
       dispatch(set_username(userData.username));
-    }
+    };
 
     if (isAuthenticated) {
       getUserData();
     }
-
-  }, [isAuthenticated, dispatch])
-
+  }, [isAuthenticated, dispatch]);
 
   return (
-  <>
-    {
-      isAuthenticated && <>
-          <Header/>
-          <NavBar/>
-          <RecipeAdder/>
+    <>
+      {isAuthenticated && (
+        <>
+          <Header />
+          <NavBar />
+          <RecipeAdder />
         </>
-    }
-    {
-      !isAuthenticated && <div>you need to login first!!!</div>
-    }
-
-  </> );
-}
+      )}
+      {!isAuthenticated && <div>you need to login first!!!</div>}
+    </>
+  );
+};
 
 export default ProfilePage;

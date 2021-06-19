@@ -3,7 +3,7 @@ import { usePromiseTracker } from 'react-promise-tracker';
 import Loader from 'react-loader-spinner';
 import * as styles from './loadingInd.module.css';
 
-const LoadingInd = ({ color }): JSX.Element => {
+const LoadingInd = ({ color }: { color: string }): JSX.Element => {
   const dotColor: string = color || 'white';
   const { promiseInProgress } = usePromiseTracker();
 
