@@ -1,8 +1,7 @@
-import React from "react";
-import Recipe from "../Recipe/recipe";
+import React from 'react';
+import Recipe from '../Recipe/recipe';
 
-const RecipeList = ({ recipeStore, viewAsSelf}) => {
-
+const RecipeList = ({ recipeStore, viewAsSelf }) => {
   return (
     <>
       {recipeStore.length

@@ -1,5 +1,5 @@
-import React from "react";
-import * as styles from "./recipeModal.module.css";
+import React from 'react';
+import * as styles from './recipeModal.module.css';
 
 const RecipeModal = ({ show, handleClose, recipe }) => {
   let j = 1;
@@ -9,7 +9,7 @@ const RecipeModal = ({ show, handleClose, recipe }) => {
       <div
         className={styles.closeIcon}
         onClick={handleClose}
-        aria-hidden="true"
+        aria-hidden='true'
       >
         x
       </div>

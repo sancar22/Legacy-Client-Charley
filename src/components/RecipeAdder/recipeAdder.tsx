@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import Modal from "../Modals/Modal/modal";
-import * as styles from "./recipeAdder.module.css";
+import React, { useState } from 'react';
+import Modal from '../Modals/Modal/modal';
+import * as styles from './recipeAdder.module.css';
 
 const RecipeAdder = () => {
   const [modalStatus, setModalStatus] = useState(false);
@@ -14,7 +14,7 @@ const RecipeAdder = () => {
       <div
         className={styles.addButton}
         onClick={handleModal}
-        aria-hidden="true"
+        aria-hidden='true'
       >
         +
       </div>

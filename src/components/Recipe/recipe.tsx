@@ -1,15 +1,13 @@
-import React, {useState} from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { BsPencil } from "react-icons/bs";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { BsPencil } from 'react-icons/bs';
+import { delete_item, add_item } from '../../state/actions';
+import apiService from '../../services/apiService';
+import RecipeModal from '../Modals/RecipeModal/recipeModal';
+import EditModal from '../Modals/EditModal/editModal';
+import * as styles from './recipe.module.css';
 
-import { delete_item, add_item } from "../../state/actions";
-import apiService from "../../services/apiService";
-import RecipeModal from "../Modals/RecipeModal/recipeModal";
-import EditModal from "../Modals/EditModal/editModal";
-import * as styles from "./recipe.module.css";
-
-
-const Recipe = ({ recipe, remove, edit, save, self}) => {
+const Recipe = ({ recipe, remove, edit, save, self }) => {
   const [inFocus, setInFocus] = useState(false);
   const [modalStatus, setModalStatus] = useState(false);
   const [editModalStatus, setEditModalStatus] = useState(false);
@@ -21,8 +19,8 @@ const Recipe = ({ recipe, remove, edit, save, self}) => {
     setModalStatus(!modalStatus);
   };
   const handleEditModal = () => {
-    setEditModalStatus(!editModalStatus)
-  }
+    setEditModalStatus(!editModalStatus);
+  };
 
   const handleDelete = async () => {
     try {
@@ -42,11 +40,11 @@ const Recipe = ({ recipe, remove, edit, save, self}) => {
     } catch (e) {
       console.log(e);
     }
-  }
+  };
 
-  let keywordString = "";
+  let keywordString = '';
   if (recipe.keywords) {
-    keywordString = recipe.keywords.join(", ");
+    keywordString = recipe.keywords.join(', ');
   }
 
   return (
@@ -55,17 +53,17 @@ const Recipe = ({ recipe, remove, edit, save, self}) => {
         className={styles.container}
         onMouseEnter={() => setInFocus(true)}
         onMouseLeave={() => setInFocus(false)}
-        aria-hidden="true"
+        aria-hidden='true'
       >
         {recipe.image && (
-          <img src={recipe.image} className={styles.image} alt="recipe" />
+          <img src={recipe.image} className={styles.image} alt='recipe' />
         )}
         {!recipe.image && <div className={styles.noImage}></div>}
 
         <div
           className={styles.detailsBox}
           onClick={handleModal}
-          aria-hidden="true"
+          aria-hidden='true'
         >
           <div>
             <div className={styles.details__name}>{recipe.name}</div>
@@ -89,7 +87,7 @@ const Recipe = ({ recipe, remove, edit, save, self}) => {
             <div
               className={inFocus ? styles.button__show : styles.button__hide}
               onClick={handleDelete}
-              aria-hidden="true"
+              aria-hidden='true'
             >
               x
             </div>
@@ -100,7 +98,7 @@ const Recipe = ({ recipe, remove, edit, save, self}) => {
                 inFocus ? styles.editButton__show : styles.editButton__hide
               }
               onClick={handleEditModal}
-              aria-hidden="true"
+              aria-hidden='true'
             >
               <BsPencil />
             </div>
@@ -109,9 +107,9 @@ const Recipe = ({ recipe, remove, edit, save, self}) => {
             <div
               className={inFocus ? styles.button__show : styles.button__hide}
               onClick={saved ? handleDelete : handleSave}
-              aria-hidden="true"
+              aria-hidden='true'
             >
-              {saved ? "x" : "+"}
+              {saved ? 'x' : '+'}
             </div>
           ) : null}
         </div>

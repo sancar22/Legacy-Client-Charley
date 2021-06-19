@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import { Link } from "gatsby";
-import * as styles from "./modal.module.css";
-import { trackPromise } from "react-promise-tracker";
+import React, { useState } from 'react';
+import { Link } from 'gatsby';
+import { trackPromise } from 'react-promise-tracker';
+import * as styles from './modal.module.css';
 
-import LoadingInd from "../../LoadingInd/loadingInd";
-import apiService from "../../../services/apiService";
+import LoadingInd from '../../LoadingInd/loadingInd';
+import apiService from '../../../services/apiService';
 
 const Modal = ({ show, handleClose }) => {
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState('');
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
-
 
   const handleChange = ({ target }) => {
     setUrl(target.value);
@@ -20,18 +19,16 @@ const Modal = ({ show, handleClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     trackPromise(
-      apiService
-        .scrapeRecipe(url)
-        .then((res) => {
-          if (res.ok) {
-            setUrl("");
-            setSuccess(true);
-            setError(false);
-          } else {
-            setError(true);
-            setSuccess(false);
-          }
-        })
+      apiService.scrapeRecipe(url).then((res) => {
+        if (res.ok) {
+          setUrl('');
+          setSuccess(true);
+          setError(false);
+        } else {
+          setError(true);
+          setSuccess(false);
+        }
+      })
     );
   };
 
@@ -42,15 +39,15 @@ const Modal = ({ show, handleClose }) => {
 
         <form className={styles.form} onSubmit={handleSubmit}>
           <input
-            name="url"
+            name='url'
             value={url}
             onChange={handleChange}
             className={styles.input}
           />
-          <LoadingInd color="lightgrey" />
+          <LoadingInd color='lightgrey' />
           {success ? (
             <div className={styles.text__success}>
-              succcess! take me to <Link to="/recipes">my recipes</Link>
+              succcess! take me to <Link to='/recipes'>my recipes</Link>
             </div>
           ) : null}
           {error ? (
@@ -59,7 +56,7 @@ const Modal = ({ show, handleClose }) => {
             </p>
           ) : null}
 
-          <button type="submit" disabled={!url}>
+          <button type='submit' disabled={!url}>
             submit
           </button>
         </form>
