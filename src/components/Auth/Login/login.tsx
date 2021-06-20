@@ -48,7 +48,7 @@ const Login = (): JSX.Element => {
 
   return (
     <div className={styles.container}>
-      <img src={logo} className={styles.logo} alt='logo' />
+      <img data-testid='logo' src={logo} className={styles.logo} alt='logo' />
       <form onSubmit={handleSubmit} className={styles.loginForm}>
         <p className={styles.title}>welcome to chef share</p>
         <input
