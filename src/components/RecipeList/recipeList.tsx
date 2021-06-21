@@ -13,7 +13,7 @@ const RecipeList = ({
     {recipeStore.length
       && recipeStore.map((recipe: IRecipe) => (viewAsSelf ? (
           <Recipe
-            key={recipe.id}
+            key={recipe._id}
             recipe={recipe}
             remove={true}
             edit={true}
@@ -22,7 +22,7 @@ const RecipeList = ({
           />
       ) : (
           <Recipe
-            key={recipe.id}
+            key={recipe._id}
             recipe={recipe}
             remove={false}
             edit={false}

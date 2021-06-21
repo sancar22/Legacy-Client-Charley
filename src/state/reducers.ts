@@ -26,14 +26,14 @@ const username = (state = 'nobody', action) => {
   }
 };
 
-const recipeStore = (state = [], action) => {
+const recipeStore = (state: any = [], action) => {
   switch (action.type) {
     case 'REWRITE_STORE':
       state = [...action.payload];
       return state;
 
     case 'DELETE_ITEM':
-      return state.filter((item) => item.id !== action.payload);
+      return state.filter((item) => item._id.toString() !== action.payload.toString());
 
     case 'ADD_ITEM':
       return [...state, action.recipe];

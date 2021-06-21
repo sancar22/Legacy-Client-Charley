@@ -32,8 +32,8 @@ const EditModal = ({
     event.preventDefault();
     try {
       if (nameInput !== recipe.name) {
-        await apiService.nameChange(recipe.id, nameInput);
-        dispatch(change_name(recipe.id, nameInput));
+        await apiService.nameChange(recipe._id, nameInput);
+        dispatch(change_name(recipe._id, nameInput));
       }
       handleClose();
     } catch (e) {
@@ -52,9 +52,9 @@ const EditModal = ({
     if (noteInput) {
       const newNote = { id: uuid.v4(), text: noteInput };
       try {
-        await apiService.addNote(recipe.id, newNote);
+        await apiService.addNote(recipe._id, newNote);
         setNotes((oldNotes) => [...oldNotes, newNote]);
-        dispatch(add_note(recipe.id, newNote));
+        dispatch(add_note(recipe._id, newNote));
         setNoteInput('');
       } catch (e) {
         console.log(e);
@@ -65,8 +65,8 @@ const EditModal = ({
   const handleDelete = async (event) => {
     const noteId: string = event.target.id;
     try {
-      await apiService.deleteNote(recipe.id, noteId);
-      dispatch(delete_note(recipe.id, noteId));
+      await apiService.deleteNote(recipe._id, noteId);
+      dispatch(delete_note(recipe._id, noteId));
       setNotes((oldNotes) => oldNotes.filter((note) => note.id !== noteId));
     } catch (e) {
       console.log(e);

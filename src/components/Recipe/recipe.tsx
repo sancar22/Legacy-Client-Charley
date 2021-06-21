@@ -37,8 +37,8 @@ const Recipe = ({
 
   const handleDelete = async () => {
     try {
-      await apiService.deleteRecipe(recipe.id);
-      dispatch(delete_item(recipe.id));
+      await apiService.deleteRecipe(recipe._id);
+      dispatch(delete_item(recipe._id));
       setSaved(false);
     } catch (e) {
       console.log(e);
@@ -119,10 +119,10 @@ const Recipe = ({
           {save && (
             <div
               className={inFocus ? styles.button__show : styles.button__hide}
-              onClick={saved ? handleDelete : handleSave}
+              onClick={handleSave}
               aria-hidden='true'
             >
-              {saved ? 'x' : '+'}
+              +
             </div>
           )}
         </div>

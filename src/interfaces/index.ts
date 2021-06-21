@@ -22,7 +22,7 @@ export interface IExtractedRecipe {
 }
 
 export interface IRecipe extends IExtractedRecipe {
-  id: string;
+  _id: string;
   notes: INote[];
   origin: string;
   url: string;
