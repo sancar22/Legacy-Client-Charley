@@ -6,8 +6,7 @@ import logo from '../../../images/smallhat.png';
 import * as styles from './header.module.css';
 
 const Header = (): JSX.Element => {
-  const state = useSelector<IState>((state) => state);
-  console.log(state);
+  const { username } = useSelector<IState>((state) => state.username);
 
   return (
     <div className={styles.container}>

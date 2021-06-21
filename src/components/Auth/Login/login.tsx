@@ -43,7 +43,7 @@ const Login = (): JSX.Element => {
         })
         .catch(() => {
           setLoginError(true);
-        })
+        }),
     );
   };
 

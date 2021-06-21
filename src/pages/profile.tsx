@@ -10,7 +10,7 @@ import NavBar from '../components/Headings/NavBar/navbar';
 
 const ProfilePage = (): JSX.Element => {
   const { isAuthenticated } = useSelector<IState>(
-    (state) => state.isAuthenticated
+    (state) => state.isAuthenticated,
   );
 
   const dispatch = useDispatch();
@@ -18,9 +18,7 @@ const ProfilePage = (): JSX.Element => {
   useEffect(() => {
     const getUserData = async () => {
       const response = await apiService.fetchProfileData();
-      console.log(response, '>>>>>>>>>+++');
       const userData = await response.json();
-      console.log(userData, '>>>>>>>>>+++');
 
       dispatch(set_username(userData.username));
     };

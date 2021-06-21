@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import storage from 'redux-persist/lib/storage';
-import { IAction, INote, IRecipe, IState } from 'src/interfaces';
+import {
+  IAction, INote, IRecipe, IState,
+} from 'src/interfaces';
 
 const initalState = {
   isAuthenticated: false,
@@ -37,7 +39,7 @@ const recipeStore = (state = initalState, action: IAction): IState => {
 
     case 'DELETE_ITEM': {
       const newRecipes = state.recipeStore.filter(
-        (recipe: IRecipe) => recipe._id.toString() !== action.payload
+        (recipe: IRecipe) => recipe._id.toString() !== action.payload,
       );
 
       return { ...state, recipeStore: [...newRecipes] };
@@ -70,7 +72,7 @@ const recipeStore = (state = initalState, action: IAction): IState => {
       const deleteNotesArr = state.recipeStore.map((recipe: IRecipe) => {
         if (recipe._id === action.payload.id) {
           const deleteNote = recipe.notes.filter(
-            (note: INote) => note.id !== action.payload.noteId
+            (note: INote) => note.id !== action.payload.noteId,
           );
           recipe.notes = deleteNote;
         }

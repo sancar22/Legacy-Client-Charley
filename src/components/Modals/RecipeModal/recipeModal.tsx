@@ -10,9 +10,7 @@ const RecipeModal = ({
   show: boolean;
   handleClose: () => void;
   recipe: IRecipe;
-}): JSX.Element => {
-
-  return (
+}): JSX.Element => (
     <div className={show ? styles.modalShow : styles.modalHide}>
       <div
         className={styles.closeIcon}
@@ -51,7 +49,6 @@ const RecipeModal = ({
         ) : null}
       </div>
     </div>
-  );
-};
+);
 
 export default RecipeModal;
