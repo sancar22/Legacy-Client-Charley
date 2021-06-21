@@ -19,7 +19,6 @@ const authPost = (route: string, body: any) => {
 
 const authPostNoBody = (route: string) => {
   const token = localStorage.getItem('accessToken');
-  console.log(BASE_URL + route);
   return fetch(BASE_URL + route, {
     method: 'POST',
     headers: {
@@ -39,6 +38,7 @@ const noAuthPost = (route: string, body: any) => fetch(BASE_URL + route, {
 
 const authGet = (route: string) => {
   const token = localStorage.getItem('accessToken');
+
   if (route === '/logout') localStorage.removeItem('accessToken');
   return fetch(BASE_URL + route, {
     headers: {

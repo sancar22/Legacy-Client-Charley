@@ -9,13 +9,17 @@ import RecipeAdder from '../components/RecipeAdder/recipeAdder';
 import NavBar from '../components/Headings/NavBar/navbar';
 
 const ProfilePage = (): JSX.Element => {
-  const isAuthenticated = useSelector<IState>((state) => state.isAuthenticated);
+  const { isAuthenticated } = useSelector<IState>(
+    (state) => state.isAuthenticated,
+  );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     const getUserData = async () => {
       const response = await apiService.fetchProfileData();
       const userData = await response.json();
+
       dispatch(set_username(userData.username));
     };
 

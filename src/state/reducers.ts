@@ -1,65 +1,85 @@
 import { combineReducers } from 'redux';
 import storage from 'redux-persist/lib/storage';
+import {
+  IAction, INote, IRecipe, IState,
+} from 'src/interfaces';
 
-const isAuthenticated = (state = false, action) => {
+const initalState = {
+  isAuthenticated: false,
+  username: 'nobody',
+  recipeStore: [],
+};
+
+const isAuthenticated = (state = initalState, action: IAction): IState => {
   switch (action.type) {
     case 'SET_IS_AUTHENTICATED':
-      state = true;
-      return state;
+      return { ...state, isAuthenticated: true };
     case 'SET_NOT_AUTHENTICATED':
-      state = false;
-      return state;
+      return { ...state, isAuthenticated: false };
     case 'LOGOUT_USER':
-      return false;
+      return { ...state, isAuthenticated: false };
     default:
       return state;
   }
 };
 
-const username = (state = 'nobody', action) => {
+const username = (state = initalState, action: IAction): IState => {
   switch (action.type) {
     case 'SET_USERNAME':
-      state = action.payload;
-      return state;
+      return { ...state, username: action.payload };
     default:
       return state;
   }
 };
 
-const recipeStore = (state: any = [], action) => {
+const recipeStore = (state = initalState, action: IAction): IState => {
   switch (action.type) {
     case 'REWRITE_STORE':
-      state = [...action.payload];
-      return state;
+      return { ...state, recipeStore: [...action.payload] };
 
-    case 'DELETE_ITEM':
-      return state.filter((item) => item._id.toString() !== action.payload.toString());
+    case 'DELETE_ITEM': {
+      const newRecipes = state.recipeStore.filter(
+        (recipe: IRecipe) => recipe._id.toString() !== action.payload,
+      );
+
+      return { ...state, recipeStore: [...newRecipes] };
+    }
 
     case 'ADD_ITEM':
-      return [...state, action.recipe];
+      return { ...state, recipeStore: [...state.recipeStore, action.payload] };
 
-    case 'CHANGE_NAME':
-      state.forEach((recipe) => {
-        if (recipe.id === action.id) recipe.name = action.name;
-      });
-      return [...state];
-
-    case 'ADD_NOTE':
-      state.forEach((recipe) => {
-        if (recipe.id === action.id) recipe.notes.push(action.note);
-      });
-      return [...state];
-
-    case 'DELETE_NOTE':
-      state.forEach((recipe) => {
-        if (recipe.id === action.recipeId) {
-          const filtered = recipe.notes.filter(
-            (note) => note.id !== action.noteId,
-          );
-          recipe.notes = filtered;
+    case 'CHANGE_NAME': {
+      const changeRecipeNameArr = state.recipeStore.map((recipe: IRecipe) => {
+        if (recipe._id === action.payload.id) {
+          recipe.name = action.payload.name;
         }
+        return recipe;
       });
-      return [...state];
+      return { ...state, recipeStore: [...changeRecipeNameArr] };
+    }
+
+    case 'ADD_NOTE': {
+      const addNotesArr = state.recipeStore.map((recipe: IRecipe) => {
+        if (recipe._id === action.payload.id) {
+          recipe.notes.push(action.payload.note);
+        }
+        return recipe;
+      });
+      return { ...state, recipeStore: [...addNotesArr] };
+    }
+
+    case 'DELETE_NOTE': {
+      const deleteNotesArr = state.recipeStore.map((recipe: IRecipe) => {
+        if (recipe._id === action.payload.id) {
+          const deleteNote = recipe.notes.filter(
+            (note: INote) => note.id !== action.payload.noteId,
+          );
+          recipe.notes = deleteNote;
+        }
+        return recipe;
+      });
+      return { ...state, recipeStore: [...deleteNotesArr] };
+    }
 
     default:
       return state;

@@ -9,8 +9,11 @@ import { rewrite_store } from '../state/actions';
 import apiService from '../services/apiService';
 
 const RecipePage = (): JSX.Element => {
-  const isAuthenticated = useSelector<IState>((state) => state.isAuthenticated);
-  const recipeStore = useSelector<IState>((state) => state.recipeStore);
+  const { isAuthenticated } = useSelector<IState>(
+    (state) => state.isAuthenticated,
+  );
+  const { recipeStore } = useSelector<IState>((state) => state.recipeStore);
+
   const dispatch = useDispatch();
 
   useEffect(() => {

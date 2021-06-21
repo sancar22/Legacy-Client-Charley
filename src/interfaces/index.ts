@@ -32,5 +32,10 @@ export interface IState {
   isAuthenticated: boolean;
   username: string;
   recipeStore: IRecipe[];
-  _persist: { version: number; rehydrated: boolean };
+  _persist?: { version: number; rehydrated: boolean };
+}
+// TODO
+export interface IAction {
+  type: string;
+  payload?: any;
 }

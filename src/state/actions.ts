@@ -1,49 +1,48 @@
-export const set_is_authenticated = () => ({
+import { IAction, IRecipe } from 'src/interfaces';
+
+export const set_is_authenticated = (): IAction => ({
   type: 'SET_IS_AUTHENTICATED',
 });
 
-export const logout_user = () => ({
+export const logout_user = (): IAction => ({
   type: 'LOGOUT_USER',
 });
 
-export const set_not_authenticated = () => ({
+export const set_not_authenticated = (): IAction => ({
   type: 'SET_NOT_AUTHENTICATED',
 });
 
-export const set_username = (username) => ({
+export const set_username = (username: string): IAction => ({
   type: 'SET_USERNAME',
   payload: username,
 });
 
-export const rewrite_store = (store) => ({
+export const rewrite_store = (store: IRecipe[]): IAction => ({
   type: 'REWRITE_STORE',
   payload: store,
 });
 
-export const add_item = (recipe) => ({
+export const add_item = (recipe: IRecipe): IAction => ({
   type: 'ADD_ITEM',
-  recipe,
+  payload: recipe,
 });
 
-export const delete_item = (id) => ({
+export const delete_item = (id: string): IAction => ({
   type: 'DELETE_ITEM',
   payload: id,
 });
 
-export const change_name = (id, name) => ({
+export const change_name = (id: string, name: string): IAction => ({
   type: 'CHANGE_NAME',
-  id,
-  name,
+  payload: { id, name },
 });
 
-export const add_note = (id, note) => ({
+export const add_note = (id: string, note: string): IAction => ({
   type: 'ADD_NOTE',
-  id,
-  note,
+  payload: { id, note },
 });
 
-export const delete_note = (recipeId, noteId) => ({
+export const delete_note = (recipeId: string, noteId: string): IAction => ({
   type: 'DELETE_NOTE',
-  recipeId,
-  noteId,
+  payload: { recipeId, noteId },
 });

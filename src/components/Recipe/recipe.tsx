@@ -25,7 +25,8 @@ const Recipe = ({
   const [modalStatus, setModalStatus] = useState(false);
   const [editModalStatus, setEditModalStatus] = useState(false);
   const [saved, setSaved] = useState(false);
-  const me = useSelector<IState>((state) => state.username);
+  const { username } = useSelector<IState>((state) => state.username);
+
   const dispatch = useDispatch();
 
   const handleModal = () => {
@@ -82,7 +83,7 @@ const Recipe = ({
             <div className={styles.details__name}>{recipe.name}</div>
             {self ? (
               <>
-                {recipe.origin === me ? null : (
+                {recipe.origin === username ? null : (
                   <div className={styles.details__origin}>
                     {`from chef ${recipe.origin}`}
                   </div>
