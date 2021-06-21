@@ -53,7 +53,12 @@ const Signup = (): JSX.Element => {
 
   return (
     <div className={styles.container}>
-      <img src={logo} className={styles.logo} alt='logo' />
+      <img
+        data-testid='signUpLogo'
+        src={logo}
+        className={styles.logo}
+        alt='logo'
+      />
       <form onSubmit={handleSubmit} className={styles.signupForm}>
         <p className={styles.title}>chef signup</p>
         <input
