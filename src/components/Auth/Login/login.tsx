@@ -37,12 +37,13 @@ const Login = (): JSX.Element => {
         .then((res) => {
           dispatch(set_is_authenticated());
           localStorage.setItem('accessToken', res.accessToken);
+
           setLogin(initialState);
           navigate('/profile');
         })
         .catch(() => {
           setLoginError(true);
-        }),
+        })
     );
   };
 

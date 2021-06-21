@@ -6,7 +6,9 @@ import logo from '../../../images/smallhat.png';
 import * as styles from './header.module.css';
 
 const Header = (): JSX.Element => {
-  const username = useSelector<IState>((state) => state.username);
+  const state = useSelector<IState>((state) => state);
+  console.log(state);
+
   return (
     <div className={styles.container}>
       <div className={styles.left__container}>

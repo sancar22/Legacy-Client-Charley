@@ -29,8 +29,13 @@ export interface IRecipe extends IExtractedRecipe {
 }
 
 export interface IState {
-  isAuthenticated: boolean;
+  isAuthenticated: { isAuthenticated: boolean };
   username: string;
   recipeStore: IRecipe[];
-  _persist: { version: number; rehydrated: boolean };
+  _persist?: { version: number; rehydrated: boolean };
+}
+// TODO
+export interface IAction {
+  type: string;
+  payload?: any;
 }

@@ -1,6 +1,4 @@
-import {
-  ILogin, INote, IRecipe, ISignup,
-} from 'src/interfaces';
+import { ILogin, INote, IRecipe, ISignup } from 'src/interfaces';
 
 // const BASE_URL = "https://chef-share-server.herokuapp.com";
 const BASE_URL = 'http://localhost:5000';
@@ -29,16 +27,18 @@ const authPostNoBody = (route: string) => {
   });
 };
 
-const noAuthPost = (route: string, body: any) => fetch(BASE_URL + route, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(body),
-});
+const noAuthPost = (route: string, body: any) =>
+  fetch(BASE_URL + route, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
 
 const authGet = (route: string) => {
   const token = localStorage.getItem('accessToken');
+
   if (route === '/logout') localStorage.removeItem('accessToken');
   return fetch(BASE_URL + route, {
     headers: {
@@ -48,9 +48,11 @@ const authGet = (route: string) => {
 };
 
 // auth
-const attemptLogin = (login: ILogin): Promise<Response> => noAuthPost('/login', login);
+const attemptLogin = (login: ILogin): Promise<Response> =>
+  noAuthPost('/login', login);
 
-const attemptSignup = (signup: ISignup): Promise<Response> => noAuthPost('/signup', signup);
+const attemptSignup = (signup: ISignup): Promise<Response> =>
+  noAuthPost('/signup', signup);
 
 const logout = (): Promise<Response> => authGet('/logout');
 
@@ -76,18 +78,22 @@ const addFromFriend = (recipe: IRecipe): Promise<Response> => {
 };
 
 // edits
-const deleteRecipe = (id: string): Promise<Response> => authPostNoBody(`/deleteRecipe/${id}`);
+const deleteRecipe = (id: string): Promise<Response> =>
+  authPostNoBody(`/deleteRecipe/${id}`);
 
 const editRecipe = (id: string, payload: any, editAction: string) => {
   const body = { id, payload };
   return authPost(`/editRecipe/${editAction}`, body);
 };
 
-const nameChange = (id: string, name: string): Promise<Response> => editRecipe(id, name, 'nameChange');
+const nameChange = (id: string, name: string): Promise<Response> =>
+  editRecipe(id, name, 'nameChange');
 
-const addNote = (id: string, note: INote): Promise<Response> => editRecipe(id, note, 'addNote');
+const addNote = (id: string, note: INote): Promise<Response> =>
+  editRecipe(id, note, 'addNote');
 
-const deleteNote = (id: string, noteId: string): Promise<Response> => editRecipe(id, noteId, 'deleteNote');
+const deleteNote = (id: string, noteId: string): Promise<Response> =>
+  editRecipe(id, noteId, 'deleteNote');
 const apiService = {
   attemptLogin,
   attemptSignup,
