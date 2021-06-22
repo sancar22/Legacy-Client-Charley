@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recipeModal component match previous recipeModal snapshot 1`] = `
+<div>
+  <div
+    aria-hidden="true"
+    onClick={[MockFunction]}
+  >
+    x
+  </div>
+  <div />
+  <div>
+    <div />
+    <ul />
+    <div>
+      Prepare
+    </div>
+  </div>
+</div>
+`;
