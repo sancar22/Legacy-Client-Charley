@@ -24,8 +24,8 @@ const Recipe = ({
   const [inFocus, setInFocus] = useState(false);
   const [modalStatus, setModalStatus] = useState(false);
   const [editModalStatus, setEditModalStatus] = useState(false);
-  const [saved, setSaved] = useState(false);
   const { username } = useSelector<IState>((state) => state.username);
+  const { recipeStore } = useSelector<IState>((state) => state.recipeStore);
 
   const dispatch = useDispatch();
 
@@ -40,7 +40,6 @@ const Recipe = ({
     try {
       await apiService.deleteRecipe(recipe._id);
       dispatch(delete_item(recipe._id));
-      setSaved(false);
     } catch (e) {
       console.log(e);
     }
@@ -48,9 +47,10 @@ const Recipe = ({
 
   const handleSave = async () => {
     try {
-      await apiService.addFromFriend(recipe);
-      dispatch(add_item(recipe));
-      setSaved(true);
+      if (!recipeStore.includes(recipe)) {
+        await apiService.addFromFriend(recipe);
+        dispatch(add_item(recipe));
+      }
     } catch (e) {
       console.log(e);
     }
