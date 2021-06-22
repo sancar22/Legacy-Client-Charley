@@ -7,7 +7,11 @@ export const mockRecipe: IRecipe = {
     'https://sweetcaramelsunday.com/wp-content/uploads/2019/06/Hash-Brown-Grilled-Cheese-19.jpg',
   keywords: ['grilled cheese', ' hash brown', ' vegetarian grilled cheese'],
   name: 'Hash Brown Grilled Cheese',
-  notes: [],
+  notes: [
+    { id: 'a', text: 'hash browns' },
+    { id: 'b', text: 'hash browns alive' },
+    { id: 'c', text: 'hash browns alive not' },
+  ],
   origin: 'asdf',
   recipeIngredient: [
     '4 slices rye sourdough',

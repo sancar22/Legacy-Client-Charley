@@ -4,13 +4,16 @@ import {
   IAction, INote, IRecipe, IState,
 } from 'src/interfaces';
 
-const initalState = {
+const initialState: IState = {
   isAuthenticated: false,
   username: 'nobody',
   recipeStore: [],
 };
 
-const isAuthenticated = (state = initalState, action: IAction): IState => {
+export const isAuthenticated = (
+  state = initialState,
+  action: IAction,
+): IState => {
   switch (action.type) {
     case 'SET_IS_AUTHENTICATED':
       return { ...state, isAuthenticated: true };
@@ -23,7 +26,7 @@ const isAuthenticated = (state = initalState, action: IAction): IState => {
   }
 };
 
-const username = (state = initalState, action: IAction): IState => {
+export const username = (state = initialState, action: IAction): IState => {
   switch (action.type) {
     case 'SET_USERNAME':
       return { ...state, username: action.payload };
@@ -32,7 +35,7 @@ const username = (state = initalState, action: IAction): IState => {
   }
 };
 
-const recipeStore = (state = initalState, action: IAction): IState => {
+export const recipeStore = (state = initialState, action: IAction): IState => {
   switch (action.type) {
     case 'REWRITE_STORE':
       return { ...state, recipeStore: [...action.payload] };
@@ -60,7 +63,7 @@ const recipeStore = (state = initalState, action: IAction): IState => {
 
     case 'ADD_NOTE': {
       const addNotesArr = state.recipeStore.map((recipe: IRecipe) => {
-        if (recipe._id === action.payload.id) {
+        if (recipe._id === action.payload.recipeId) {
           recipe.notes.push(action.payload.note);
         }
         return recipe;
@@ -70,7 +73,7 @@ const recipeStore = (state = initalState, action: IAction): IState => {
 
     case 'DELETE_NOTE': {
       const deleteNotesArr = state.recipeStore.map((recipe: IRecipe) => {
-        if (recipe._id === action.payload.id) {
+        if (recipe._id === action.payload.recipeId) {
           const deleteNote = recipe.notes.filter(
             (note: INote) => note.id !== action.payload.noteId,
           );
@@ -92,7 +95,7 @@ const appReducer = combineReducers({
   recipeStore,
 });
 
-const rootReducer = (state, action) => {
+const rootReducer = (state, action: IAction) => {
   if (action.type === 'LOGOUT_USER') {
     storage.removeItem('persist:root');
     return appReducer(undefined, action);
