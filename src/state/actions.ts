@@ -1,4 +1,4 @@
-import { IAction, IRecipe } from 'src/interfaces';
+import { IAction, INote, IRecipe } from 'src/interfaces';
 
 export const set_is_authenticated = (): IAction => ({
   type: 'SET_IS_AUTHENTICATED',
@@ -37,9 +37,9 @@ export const change_name = (id: string, name: string): IAction => ({
   payload: { id, name },
 });
 
-export const add_note = (id: string, note: string): IAction => ({
+export const add_note = (recipeId: string, note: INote): IAction => ({
   type: 'ADD_NOTE',
-  payload: { id, note },
+  payload: { recipeId, note },
 });
 
 export const delete_note = (recipeId: string, noteId: string): IAction => ({

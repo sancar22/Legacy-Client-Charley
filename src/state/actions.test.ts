@@ -52,11 +52,20 @@ describe('actions', () => {
   });
   test('should add note to recipe', () => {
     const type = 'ADD_NOTE';
-    const payload = { id: 'mockId', note: 'mockRamen is delish' };
+    const payload = {
+      recipeId: 'mockId',
+      note: {
+        id: 'asdf',
+        text: 'mockRamen is delish',
+      },
+    };
     const expectedAction = { type, payload };
-    expect(actions.add_note('mockId', 'mockRamen is delish')).toEqual(
-      expectedAction,
-    );
+    expect(
+      actions.add_note('mockId', {
+        id: 'asdf',
+        text: 'mockRamen is delish',
+      }),
+    ).toEqual(expectedAction);
   });
   test('should delete note from a recipe', () => {
     const type = 'DELETE_NOTE';
