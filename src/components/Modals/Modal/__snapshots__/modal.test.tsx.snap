@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal component match previous Modal snapshot 1`] = `
+<div>
+  <div>
+    <p>
+      Add your url
+    </p>
+    <form
+      onSubmit={[Function]}
+    >
+      <input
+        name="url"
+        onChange={[Function]}
+        value=""
+      />
+      <button
+        disabled={true}
+        type="submit"
+      >
+        submit
+      </button>
+    </form>
+    <button
+      onClick={[MockFunction]}
+    >
+      x
+    </button>
+  </div>
+</div>
+`;

@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipe component match previous Recipe snapshot 1`] = `
+Array [
+  <div
+    aria-hidden="true"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <div />
+    <div
+      aria-hidden="true"
+      onClick={[Function]}
+    >
+      <div>
+        <div />
+        <div />
+        <div />
+      </div>
+      <div>
+        
+      </div>
+    </div>
+    <div />
+  </div>,
+  <div>
+    <div
+      aria-hidden="true"
+      onClick={[Function]}
+    >
+      x
+    </div>
+    <div />
+    <div>
+      <div />
+      <ul />
+      <div>
+        Prepare
+      </div>
+    </div>
+  </div>,
+  <div>
+    <form
+      onSubmit={[Function]}
+    >
+      <div>
+        <div
+          aria-hidden="true"
+          onClick={[Function]}
+        >
+          x
+        </div>
+        <button
+          type="submit"
+        >
+          save
+        </button>
+      </div>
+      <input
+        onChange={[Function]}
+      />
+    </form>
+    <div>
+      Notes
+    </div>
+    <div
+      aria-hidden="true"
+      onClick={[Function]}
+    >
+      edit your notes!
+    </div>
+    <ul />
+  </div>,
+]
+`;
