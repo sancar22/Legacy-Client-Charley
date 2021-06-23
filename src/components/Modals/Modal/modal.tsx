@@ -7,13 +7,12 @@ import apiService from '../../../services/apiService';
 
 import * as styles from './modal.module.css';
 
-const Modal = ({
-  show,
-  handleClose,
-}: {
+interface ModalProps {
   show: boolean;
   handleClose: () => void;
-}): JSX.Element => {
+}
+
+const Modal: React.FC<ModalProps> = ({ show, handleClose }): JSX.Element => {
   const [url, setUrl] = useState('');
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);

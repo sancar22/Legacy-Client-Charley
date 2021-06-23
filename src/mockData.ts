@@ -23,4 +23,7 @@ export const mockRecipe: IRecipe = {
   url: 'https://sweetcaramelsunday.com/hash-brown-grilled-cheese/',
 };
 
-export const mockRecipeStore: IRecipe[] = new Array(5).fill(mockRecipe);
+export const mockRecipeStore: IRecipe[] = [
+  { ...mockRecipe },
+  { ...mockRecipe },
+];
