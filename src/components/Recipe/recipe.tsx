@@ -10,24 +10,26 @@ import EditModal from '../Modals/EditModal/editModal';
 
 import * as styles from './recipe.module.css';
 
-const Recipe = ({
-  recipe,
-  remove,
-  edit,
-  save,
-  self,
-}: {
+interface RecipeProps {
   recipe: IRecipe;
   remove: boolean;
   edit: boolean;
   save: boolean;
   self: boolean;
+}
+const Recipe: React.FC<RecipeProps> = ({
+  recipe,
+  remove,
+  edit,
+  save,
+  self,
 }): JSX.Element => {
   const [inFocus, setInFocus] = useState(false);
   const [modalStatus, setModalStatus] = useState(false);
   const [editModalStatus, setEditModalStatus] = useState(false);
   const { username } = useSelector<IState>((state) => state.username);
   const { recipeStore } = useSelector<IState>((state) => state.recipeStore);
+  let keywordString: string;
 
   const dispatch = useDispatch();
 
@@ -58,9 +60,8 @@ const Recipe = ({
     }
   };
 
-  let keywordString = '';
   if (recipe.keywords) {
-    keywordString = recipe.keywords.join(', ');
+    keywordString = recipe.keywords.join(', ') || '';
   }
 
   return (

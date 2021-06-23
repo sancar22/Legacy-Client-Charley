@@ -4,14 +4,16 @@ import { IRecipe } from 'src/interfaces';
 
 import * as styles from './recipeModal.module.css';
 
-const RecipeModal = ({
-  show,
-  handleClose,
-  recipe,
-}: {
+interface RecipeModalProps {
   show: boolean;
   handleClose: () => void;
   recipe: IRecipe;
+}
+
+const RecipeModal: React.FC<RecipeModalProps> = ({
+  show,
+  handleClose,
+  recipe,
 }): JSX.Element => (
   <div className={show ? styles.modalShow : styles.modalHide}>
     <div className={styles.closeIcon} onClick={handleClose} aria-hidden='true'>

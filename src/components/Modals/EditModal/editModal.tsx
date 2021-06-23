@@ -8,14 +8,16 @@ import apiService from '../../../services/apiService';
 
 import * as styles from './editModal.module.css';
 
-const EditModal = ({
-  show,
-  handleClose,
-  recipe,
-}: {
+interface EditModalProps {
   show: boolean;
   handleClose: () => void;
   recipe: IRecipe;
+}
+
+const EditModal: React.FC<EditModalProps> = ({
+  show,
+  handleClose,
+  recipe,
 }): JSX.Element => {
   const [notes, setNotes] = useState<INote[]>(recipe.notes);
   const [editMode, setEditMode] = useState<boolean>(false);
@@ -32,8 +34,8 @@ const EditModal = ({
   ): Promise<void> => {
     event.preventDefault();
     try {
+      await apiService.nameChange(recipe._id, nameInput);
       if (nameInput !== recipe.name) {
-        await apiService.nameChange(recipe._id, nameInput);
         dispatch(change_name(recipe._id, nameInput));
       }
       handleClose();
@@ -50,19 +52,18 @@ const EditModal = ({
     event: FormEvent<HTMLFormElement>,
   ): Promise<void> => {
     event.preventDefault();
-    setEditMode(false);
 
-    if (noteInput) {
-      const newNote = { id: uuid.v4(), text: noteInput };
-      try {
-        await apiService.addNote(recipe._id, newNote);
-        setNotes((oldNotes) => [...oldNotes, newNote]);
-        dispatch(add_note(recipe._id, newNote));
-        setNoteInput('');
-      } catch (e) {
-        console.log(e);
-      }
+    if (!noteInput) return;
+    const newNote = { id: uuid.v4(), text: noteInput };
+    try {
+      await apiService.addNote(recipe._id, newNote);
+      setNotes((oldNotes) => [...oldNotes, newNote]);
+      dispatch(add_note(recipe._id, newNote));
+      setNoteInput('');
+    } catch (e) {
+      console.log(e);
     }
+    setEditMode(false);
   };
 
   const handleDelete = async (event) => {
