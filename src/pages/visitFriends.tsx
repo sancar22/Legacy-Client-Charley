@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Select from 'react-select';
 import { IRecipe, IState } from 'src/interfaces';
+
 import Header from '../components/Headings/Header/header';
 import NavBar from '../components/Headings/NavBar/navbar';
 import RecipeList from '../components/RecipeList/recipeList';
@@ -11,6 +12,7 @@ type User = {
   value: string;
   label: string;
 };
+
 const VisitFriendsPage = (): JSX.Element => {
   const { isAuthenticated } = useSelector<IState>(
     (state) => state.isAuthenticated,

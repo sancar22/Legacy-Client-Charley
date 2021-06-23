@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import storage from 'redux-persist/lib/storage';
+
 import {
   IAction, INote, IRecipe, IState,
 } from 'src/interfaces';

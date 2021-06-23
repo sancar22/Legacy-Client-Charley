@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BsPencil } from 'react-icons/bs';
+
 import { IRecipe, IState } from 'src/interfaces';
 import { delete_item, add_item } from '../../state/actions';
 import apiService from '../../services/apiService';
 import RecipeModal from '../Modals/RecipeModal/recipeModal';
 import EditModal from '../Modals/EditModal/editModal';
+
 import * as styles from './recipe.module.css';
 
 const Recipe = ({
@@ -29,14 +31,14 @@ const Recipe = ({
 
   const dispatch = useDispatch();
 
-  const handleModal = () => {
+  const handleModal = (): void => {
     setModalStatus(!modalStatus);
   };
-  const handleEditModal = () => {
+  const handleEditModal = (): void => {
     setEditModalStatus(!editModalStatus);
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (): Promise<void> => {
     try {
       await apiService.deleteRecipe(recipe._id);
       dispatch(delete_item(recipe._id));
@@ -45,7 +47,7 @@ const Recipe = ({
     }
   };
 
-  const handleSave = async () => {
+  const handleSave = async (): Promise<void> => {
     try {
       if (!recipeStore.includes(recipe)) {
         await apiService.addFromFriend(recipe);
@@ -81,7 +83,8 @@ const Recipe = ({
         >
           <div>
             <div className={styles.details__name}>{recipe.name}</div>
-            {self ? (
+
+            {self && (
               <>
                 {recipe.origin === username ? null : (
                   <div className={styles.details__origin}>
@@ -89,10 +92,13 @@ const Recipe = ({
                   </div>
                 )}
               </>
-            ) : null}
+            )}
+
             <div className={styles.details__author}>{recipe.publisher}</div>
+
             <div className={styles.details__author}>{recipe.author}</div>
           </div>
+
           <div className={styles.details__keywords}>{keywordString}</div>
         </div>
 
@@ -106,6 +112,7 @@ const Recipe = ({
               x
             </div>
           )}
+
           {edit && (
             <div
               className={
@@ -117,6 +124,7 @@ const Recipe = ({
               <BsPencil />
             </div>
           )}
+
           {save && (
             <div
               className={inFocus ? styles.button__show : styles.button__hide}

@@ -1,9 +1,11 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import uuid from 'node-uuid';
+
 import { INote, IRecipe } from 'src/interfaces';
 import { change_name, add_note, delete_note } from '../../../state/actions';
 import apiService from '../../../services/apiService';
+
 import * as styles from './editModal.module.css';
 
 const EditModal = ({
@@ -15,20 +17,19 @@ const EditModal = ({
   handleClose: () => void;
   recipe: IRecipe;
 }): JSX.Element => {
-  // display states
   const [notes, setNotes] = useState<INote[]>(recipe.notes);
-  const [editMode, setEditMode] = useState(false);
-  // form management
+  const [editMode, setEditMode] = useState<boolean>(false);
   const [nameInput, setNameInput] = useState<string>(recipe.name);
-  const [noteInput, setNoteInput] = useState('');
+  const [noteInput, setNoteInput] = useState<string>('');
 
   const dispatch = useDispatch();
 
-  // title change
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setNameInput(event.target.value);
   };
-  const handleSubmit = async (event: React.SyntheticEvent) => {
+  const handleSubmit = async (
+    event: FormEvent<HTMLFormElement>,
+  ): Promise<void> => {
     event.preventDefault();
     try {
       if (nameInput !== recipe.name) {
@@ -41,11 +42,13 @@ const EditModal = ({
     }
   };
 
-  // adding notes
   const handleNoteChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNoteInput(event.target.value);
   };
-  const handleNoteSubmit = async (event: React.SyntheticEvent) => {
+
+  const handleNoteSubmit = async (
+    event: FormEvent<HTMLFormElement>,
+  ): Promise<void> => {
     event.preventDefault();
     setEditMode(false);
 
@@ -94,6 +97,7 @@ const EditModal = ({
       </form>
 
       <div className={styles.heading__notes}>Notes</div>
+
       <div
         className={styles.button__addNote}
         onClick={() => setEditMode(!editMode)}
@@ -101,6 +105,7 @@ const EditModal = ({
       >
         edit your notes!
       </div>
+
       {editMode ? (
         <>
           <form className={styles.form__addNotes} onSubmit={handleNoteSubmit}>
@@ -114,22 +119,24 @@ const EditModal = ({
             </button>
           </form>
 
-          {notes.map((note, index) => (
-            <div key={index} className={styles.delete__container}>
-              <button id={note.id} onClick={handleDelete}>
-                x
-              </button>
-              <p>{note.text}</p>
-            </div>
-          ))}
+          {notes
+            && notes.map((note, index) => (
+              <div key={index} className={styles.delete__container}>
+                <button id={note.id} onClick={handleDelete}>
+                  x
+                </button>
+                <p>{note.text}</p>
+              </div>
+            ))}
         </>
       ) : (
         <ul>
-          {notes.map((note, index) => (
-            <li key={index} className={styles.note}>
-              {note.text}
-            </li>
-          ))}
+          {notes
+            && notes.map((note, index) => (
+              <li key={index} className={styles.note}>
+                {note.text}
+              </li>
+            ))}
         </ul>
       )}
     </div>

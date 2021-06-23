@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { IRecipe } from 'src/interfaces';
+
 import Recipe from '../Recipe/recipe';
 
 const RecipeList = ({

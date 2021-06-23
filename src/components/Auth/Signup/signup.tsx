@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { Link, navigate } from 'gatsby';
 import { useDispatch } from 'react-redux';
 import { trackPromise } from 'react-promise-tracker';
@@ -7,6 +7,7 @@ import { ISignup } from 'src/interfaces';
 import LoadingInd from '../../LoadingInd/loadingInd';
 import apiService from '../../../services/apiService';
 import { set_is_authenticated } from '../../../state/actions';
+
 import logo from '../../../images/bighat.png';
 import * as styles from './signup.module.css';
 
@@ -18,8 +19,8 @@ const initialState = {
 
 const Signup = (): JSX.Element => {
   const [signup, setSignup] = useState<ISignup>(initialState);
-  const [signupError, setSignupError] = useState(false);
-  const [errorText, setErrorText] = useState('');
+  const [signupError, setSignupError] = useState<boolean>(false);
+  const [errorText, setErrorText] = useState<string>('');
   const dispatch = useDispatch();
 
   const handleLogin = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -32,8 +33,9 @@ const Signup = (): JSX.Element => {
   };
   const validateForm = () => !signup?.email || !signup.password || !signup.username;
 
-  const handleSubmit = (event: React.SyntheticEvent): void => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+
     trackPromise(
       apiService
         .attemptSignup(signup)
@@ -59,6 +61,7 @@ const Signup = (): JSX.Element => {
         className={styles.logo}
         alt='logo'
       />
+
       <form onSubmit={handleSubmit} className={styles.signupForm}>
         <p className={styles.title}>chef signup</p>
         <input
@@ -81,7 +84,9 @@ const Signup = (): JSX.Element => {
           value={signup?.username}
           onChange={handleLogin}
         />
+
         <LoadingInd color={'white'} />
+
         {signupError && <p className={styles.errorText}>{errorText}</p>}
 
         <button type='submit' disabled={validateForm()}>

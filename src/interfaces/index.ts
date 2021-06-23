@@ -2,9 +2,11 @@ export interface ILogin {
   email?: string;
   password?: string;
 }
+
 export interface ISignup extends ILogin {
   username?: string;
 }
+
 export interface INote {
   id: string;
   text: string;
@@ -34,6 +36,7 @@ export interface IState {
   recipeStore: IRecipe[];
   _persist?: { version: number; rehydrated: boolean };
 }
+
 // TODO
 export interface IAction {
   type: string;

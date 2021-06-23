@@ -1,8 +1,10 @@
 import React from 'react';
 import { navigate } from 'gatsby';
 import { useDispatch } from 'react-redux';
+
 import { logout_user } from '../../../state/actions';
 import apiService from '../../../services/apiService';
+
 import * as styles from './logout.module.css';
 
 const Logout = (): JSX.Element => {
@@ -13,8 +15,8 @@ const Logout = (): JSX.Element => {
       await apiService.logout();
       dispatch(logout_user());
       navigate('/');
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      console.log(err);
     }
   };
 

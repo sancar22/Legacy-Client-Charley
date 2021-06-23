@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { IState } from 'src/interfaces';
 
+import { IState } from 'src/interfaces';
 import Header from '../components/Headings/Header/header';
 import NavBar from '../components/Headings/NavBar/navbar';
 import RecipeList from '../components/RecipeList/recipeList';

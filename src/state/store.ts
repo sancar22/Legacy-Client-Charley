@@ -13,7 +13,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const loggerMiddleware = createLogger();
 const middleware = composeWithDevTools(applyMiddleware(loggerMiddleware));
-
+// TODO
 const reduxStore = () => {
   const store = createStore(persistedReducer, middleware);
   const persistor = persistStore(store);

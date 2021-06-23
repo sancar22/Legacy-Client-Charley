@@ -1,11 +1,13 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { Link, navigate } from 'gatsby';
 import { useDispatch } from 'react-redux';
 import { trackPromise } from 'react-promise-tracker';
+
 import { ILogin } from 'src/interfaces';
 import LoadingInd from '../../LoadingInd/loadingInd';
 import apiService from '../../../services/apiService';
 import { set_is_authenticated } from '../../../state/actions';
+
 import logo from '../../../images/bighat.png';
 import * as styles from './login.module.css';
 
@@ -13,9 +15,10 @@ const initialState = {
   email: '',
   password: '',
 };
+
 const Login = (): JSX.Element => {
   const [login, setLogin] = useState<ILogin>(initialState);
-  const [loginError, setLoginError] = useState(false);
+  const [loginError, setLoginError] = useState<boolean>(false);
   const dispatch = useDispatch();
 
   const handleLogin = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -26,10 +29,12 @@ const Login = (): JSX.Element => {
     setLogin(newLogin);
     setLoginError(false);
   };
+
   const validateForm = () => !login?.email || !login?.password;
 
-  const handleSubmit = (event: React.SyntheticEvent): void => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+
     trackPromise(
       apiService
         .attemptLogin(login)
@@ -37,7 +42,6 @@ const Login = (): JSX.Element => {
         .then((res) => {
           dispatch(set_is_authenticated());
           localStorage.setItem('accessToken', res.accessToken);
-
           setLogin(initialState);
           navigate('/profile');
         })
@@ -60,17 +64,19 @@ const Login = (): JSX.Element => {
           type='email'
           name='email'
           placeholder='email'
-          value={login?.email}
+          value={login.email}
           onChange={handleLogin}
         />
         <input
           type='password'
           name='password'
           placeholder='password'
-          value={login?.password}
+          value={login.password}
           onChange={handleLogin}
         />
+
         <LoadingInd color={'white'} />
+
         {loginError ? (
           <p className={styles.errorText}>user name or password is invalid</p>
         ) : null}
