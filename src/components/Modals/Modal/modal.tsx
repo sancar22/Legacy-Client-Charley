@@ -1,10 +1,11 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { Link } from 'gatsby';
 import { trackPromise } from 'react-promise-tracker';
-import * as styles from './modal.module.css';
 
 import LoadingInd from '../../LoadingInd/loadingInd';
 import apiService from '../../../services/apiService';
+
+import * as styles from './modal.module.css';
 
 const Modal = ({
   show,
@@ -22,8 +23,9 @@ const Modal = ({
     setError(false);
     setSuccess(false);
   };
-  const handleSubmit = (event: React.SyntheticEvent): void => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+
     trackPromise(
       apiService.scrapeRecipe(url).then((res) => {
         if (res.ok) {

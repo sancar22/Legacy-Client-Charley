@@ -4,8 +4,18 @@ import {
 
 // const BASE_URL = "https://chef-share-server.herokuapp.com";
 const BASE_URL = 'http://localhost:5000';
+type TBody =
+  | ILogin
+  | { signup: ISignup }
+  | { recipe: IRecipe }
+  | {
+      payload?: string | INote | string;
+      id?: string;
+      url?: string;
+      username?: string;
+    };
 
-const authPost = (route: string, body: any) => {
+const authPost = (route: string, body: TBody) => {
   const token = localStorage.getItem('accessToken');
   return fetch(BASE_URL + route, {
     method: 'POST',
@@ -28,7 +38,7 @@ const authPostNoBody = (route: string) => {
   });
 };
 
-const noAuthPost = (route: string, body: any) => fetch(BASE_URL + route, {
+const noAuthPost = (route: string, body: TBody) => fetch(BASE_URL + route, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -47,7 +57,6 @@ const authGet = (route: string) => {
   });
 };
 
-// auth
 const attemptLogin = (login: ILogin): Promise<Response> => noAuthPost('/login', login);
 
 const attemptSignup = (signup: ISignup): Promise<Response> => noAuthPost('/signup', signup);
@@ -56,13 +65,11 @@ const logout = (): Promise<Response> => authGet('/logout');
 
 const fetchProfileData = (): Promise<Response> => authGet('/profile');
 
-// scraping
 const scrapeRecipe = (url: string): Promise<Response> => {
   const body = { url };
   return authPost('/scrape', body);
 };
 
-// friends
 const getFriends = (): Promise<Response> => authGet('/users');
 
 const getFriendStore = (username: string): Promise<Response> => {
@@ -78,7 +85,11 @@ const addFromFriend = (recipe: IRecipe): Promise<Response> => {
 // edits
 const deleteRecipe = (id: string): Promise<Response> => authPostNoBody(`/deleteRecipe/${id}`);
 
-const editRecipe = (id: string, payload: any, editAction: string) => {
+const editRecipe = (
+  id: string,
+  payload: string | INote | string,
+  editAction: string,
+) => {
   const body = { id, payload };
   return authPost(`/editRecipe/${editAction}`, body);
 };
@@ -88,6 +99,7 @@ const nameChange = (id: string, name: string): Promise<Response> => editRecipe(i
 const addNote = (id: string, note: INote): Promise<Response> => editRecipe(id, note, 'addNote');
 
 const deleteNote = (id: string, noteId: string): Promise<Response> => editRecipe(id, noteId, 'deleteNote');
+
 const apiService = {
   attemptLogin,
   attemptSignup,

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+
 import Modal from '../Modals/Modal/modal';
+
 import * as styles from './recipeAdder.module.css';
 
 const RecipeAdder = (): JSX.Element => {
-  const [modalStatus, setModalStatus] = useState(false);
+  const [modalStatus, setModalStatus] = useState<boolean>(false);
 
-  const handleModal = () => {
+  const handleModal = (): void => {
     setModalStatus(!modalStatus);
   };
 

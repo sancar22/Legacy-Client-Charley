@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+
 import { set_is_authenticated, set_not_authenticated } from './actions';
 import reduxStore from './store';
 
@@ -14,6 +15,7 @@ const handleAuth = () => {
     store.dispatch(set_not_authenticated());
   }
 };
+// TODO
 const root = ({ element }): JSX.Element => (
   <Provider store={store}>
     <PersistGate
